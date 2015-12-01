@@ -34,16 +34,7 @@ public class WeixinServlet extends HttpServlet {
 	private String token = "lixin891230";//这个Token是随机生成，但是必须跟企业号上的相同
 	
 	/**
-     * 微信公众平台 成为开发者验证入口
-     * 
-     * @param request
-     *            the request send by the client to the server
-     * @param response
-     *            the response send by the server to the client
-     * @throws ServletException
-     *             if an error occurred
-     * @throws IOException
-     *             if an error occurred
+     * 微信公众平台 开发者验证入口
      */
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -70,7 +61,6 @@ public class WeixinServlet extends HttpServlet {
         	System.out.println("微信平台认证通过："+echostr);
             response.getWriter().print(echostr);
         }
-    	
     }
 	
 	/**
@@ -191,5 +181,4 @@ public class WeixinServlet extends HttpServlet {
 			}
 		}
 	}
-
 }
