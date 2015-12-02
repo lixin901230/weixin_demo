@@ -1,0 +1,48 @@
+
+
+自定义菜单json：
+{
+     "button":[
+     {	
+          "type":"view",
+          "name":"关于我们",
+          "url":"https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx70b0d2dbde434838&redirect_uri=http%3A%2F%2Fwww.lixinsj.com.cn%2Fweixin%2Fabout.jsp&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect"
+      },
+      {	
+          "type":"view",
+          "name":"李鑫的微站",
+          "url":"https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx70b0d2dbde434838&redirect_uri=https%3A%2F%2Fwww.lixinsj.com.cn%2Fweixin%2FwxOAuthCallback.do&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect"
+      },
+      {
+           "name":"其他",
+           "sub_button":[
+           {	
+               "type":"view",
+               "name":"搜索",
+               "url":"http://www.baidu.com/"
+            },
+            {
+               "type":"view",
+               "name":"视频",
+               "url":"http://v.qq.com/"
+            },
+            {
+               "type":"click",
+               "name":"赞一下我们",
+               "key":"V1001_GOOD"
+            }]
+       }]
+}
+
+
+
+网页授权地址
+https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx70b0d2dbde434838&redirect_uri=http%3A%2F%2Fwww.lixinsj.com.cn%2Fweixin%2FwxOAuthCallback.do&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect
+
+
+https://open.weixin.qq.com/connect/oauth2/authorize
+?appid=wx70b0d2dbde434838
+&redirect_uri=http://www.lixinsj.com.cn/weixin/wxOAuthCallback.do
+&response_type=code
+&scope=snsapi_userinfo
+&state=STATE#wechat_redirect
