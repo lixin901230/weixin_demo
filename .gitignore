@@ -3,6 +3,7 @@
 .springBeans
 /target/
 /src/main/webapp/WEB-INF/classes/
+/src/main/webapp/WEB-INF/lib
 
 #/src/main/webapp/incoming/
 #/src/main/webapp/upload/images/

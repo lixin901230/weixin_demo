@@ -6,6 +6,6 @@
 <title>关于我们</title>
 </head>
 <body>
-	关于我们
+	<div style="font-size: 45px;">关于我们（微信第三方网页授权认证成功）</div>
 </body>
 </html>

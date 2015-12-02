@@ -1,7 +1,6 @@
 package com.lx.weixin.servlet;
 
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 
 import javax.servlet.ServletException;
@@ -20,12 +19,13 @@ public class WeixinOAuthCallbackServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	public static void main(String[] args) throws Exception {
-		String url = URLEncoder.encode("https://www.lixinsj.com.cn/weixin/wxOAuthCallback.do", "UTF-8");
+		String url = URLEncoder.encode("http://www.lixinsj.com.cn/weixin/wxOAuthCallback.do", "UTF-8");
 		System.out.println(url);
 	}
        
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("doGet");
+		request.getRequestDispatcher("/index.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
