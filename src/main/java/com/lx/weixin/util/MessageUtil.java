@@ -114,15 +114,15 @@ public class MessageUtil {
 	public static String initNewsMessage(String toUserName, String fromUserName) {
 		
 		List<NewsMessageBody> msgBodys = new ArrayList<NewsMessageBody>();
-		NewsMessageBody msgBody = new NewsMessageBody("课程空间的图文消息", "这是lixin的第一条图文测试消息", 
-				"http://www.snowsowhite.com.cn/weixin/upload/images/shuangjiegun.jpg", 
-				"http://www.snowsowhite.com.cn/weixin/upload/images/shuangjiegun.jpg");
-		NewsMessageBody msgBody2 = new NewsMessageBody("来发福利了", "漂亮MM", 
-				"http://www.snowsowhite.com.cn/weixin/upload/images/meinv.jpg", 
-				"http://www.snowsowhite.com.cn/weixin/upload/images/meinv.jpg");
+		NewsMessageBody msgBody = new NewsMessageBody("还不快给朕跪下请安！", "这是lixin的第一条图文测试消息", 
+				"http://www.lixinsj.com.cn/weixin/upload/images/shuangjiegun.jpg", 
+				"http://www.lixinsj.com.cn/weixin/upload/images/shuangjiegun.jpg");
+		NewsMessageBody msgBody2 = new NewsMessageBody("你的微信openId="+fromUserName+"，感谢你关注本公众号！你的关注是对我最大的支持，李鑫在此表示感谢！特献上一份小福利！", "漂亮MM", 
+				"http://www.lixinsj.com.cn/weixin/upload/images/meinv.jpg", 
+				"http://www.lixinsj.com.cn/weixin/upload/images/meinv.jpg");
 		NewsMessageBody msgBody3 = new NewsMessageBody("萌宠来了", "萌萌哒", 
-				"http://www.snowsowhite.com.cn/weixin/upload/images/Zhuoku189.jpg", 
-				"http://inside.kfkc.webtrn.cn");
+				"http://www.lixinsj.com.cn/weixin/upload/images/Zhuoku189.jpg", 
+				"http://www.lixinsj.com.cn/weixin");
 		msgBodys.add(msgBody);
 		msgBodys.add(msgBody2);
 		msgBodys.add(msgBody3);
