@@ -24,4 +24,11 @@ public interface IUserLoginRegsiterService {
 	 * @return
 	 */
 	public int saveUser(UserInfo userInfo);
+	
+	/**
+	 * 根据微信账号唯一标识查询该用户信息
+	 * @param unionId
+	 * @return
+	 */
+	public UserInfo getUserInfoByUnionId(String unionId);
 }
