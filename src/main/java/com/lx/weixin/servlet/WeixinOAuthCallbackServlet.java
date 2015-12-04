@@ -218,7 +218,7 @@ public class WeixinOAuthCallbackServlet extends HttpServlet {
 					return false;
 				}
 			} else {
-				logger.error("HttpClient 调用微信平台失败，通过微信平台code获取网页授权access_token和UnionId失败！httpclient state code="+stateCode);
+				logger.error("HttpClient 调用微信平台失败，验证网页授权access_token是否有效失败！httpclient state code="+stateCode);
 			}
 		} catch (Exception e) {
 			logger.error("请求微信验证网页授权access_token失败，error："+e);
