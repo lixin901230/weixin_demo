@@ -33,4 +33,13 @@ public class UserLoginRegisterServiceImpl implements IUserLoginRegsiterService {
 		return flag;
 	}
 
+	@Override
+	public UserInfo getUserInfoByUnionId(String unionId) {
+		return userLoginRegsiterDao.getUserInfoByUnionId(unionId);
+	}
+	
+	@Override
+	public UserInfo login(String userName, String password) {
+		return userLoginRegsiterDao.login(userName, password);
+	}
 }

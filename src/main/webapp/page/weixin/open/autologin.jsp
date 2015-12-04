@@ -1,13 +1,13 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!doctype html>
 <html>
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=750, target-densitydpi=device-dpi, user-scalable=no">
-	<script type="text/javascript" src="${curResPath}/script/jquery-1.8.2.min.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resource/jquery-1.9.1.min.js"></script>
 	<script type="text/javascript">
 	
-		var unionId = "${(Session.unionId)!''}";
-		var redirectUrl = $.trim("${(redirectUrl)!''}");
+		var unionId = "${unionId}";	//从session中回去微信账号唯一标识
 		$(function(){
 			toAutoLogin();
 		});
@@ -27,16 +27,11 @@
 					async: false,
 					success: function(data){
 						if(data) {
+							var redirectUrl = '/page/weixin/open/index.jsp';
 							if(data.success) {
-							    if(redirectUrl != ''){
-							        window.location.href=redirectUrl;
-							    } else {
-							        window.location.href='${authUrl}redirect.action?redirectUrl=/weixin/open/index.action';
-							    }
-							} else {
-								var msg = data.logInfo;
-								window.location.href='${openUrl}index.action';
+								redirectUrl="/page/weixin/auth/myIndex.jsp";
 							}
+							window.location.href = redirectUrl;
 						}
 					},
 					error: function() {

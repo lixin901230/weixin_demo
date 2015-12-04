@@ -31,8 +31,18 @@
   	<servlet-name>WeixinOAuthCallbackServlet</servlet-name>
   	<servlet-class>com.lx.weixin.servlet.WeixinOAuthCallbackServlet</servlet-class>
   </servlet>
+  <servlet>
+  	<servlet-name>LoginRegsiterServlet</servlet-name>
+  	<display-name>LoginRegsiterServlet</display-name>
+  	<description></description>
+  	<servlet-class>com.lx.weixin.servlet.LoginRegsiterServlet</servlet-class>
+  </servlet>
   <servlet-mapping>
   	<servlet-name>WeixinOAuthCallbackServlet</servlet-name>
   	<url-pattern>/wxOAuthCallback.do</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>LoginRegsiterServlet</servlet-name>
+  	<url-pattern>/LoginRegsiterServlet</url-pattern>
   </servlet-mapping>
 </web-app>

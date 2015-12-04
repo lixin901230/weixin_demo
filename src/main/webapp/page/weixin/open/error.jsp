@@ -4,9 +4,9 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=750, target-densitydpi=device-dpi, user-scalable=no">
-	<title>我的首页（已登录）</title>
+	<title>错误页面</title>
 </head>
 <body>
-	<div style="font-size: 45px;">李鑫的微信网站首页（微信第三方网页授权认证成功）<div>
+
 </body>
 </html>

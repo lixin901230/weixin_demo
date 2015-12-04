@@ -10,7 +10,11 @@ public class UUIDUtil {
 	 */
 	public static String id() {
 		String uuidStr = UUID.randomUUID().toString();
-		String uuid = uuidStr.replaceAll("-", uuidStr);
+		String uuid = uuidStr.replaceAll("-", "");
 		return uuid;
+	}
+	
+	public static void main(String[] args) {
+		System.out.println(id());
 	}
 }

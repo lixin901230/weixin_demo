@@ -30,4 +30,19 @@ public interface IUserLoginRegsiterDao {
 	 * @return
 	 */
 	public int saveUser(String sql, UserInfo userInfo);
+	
+	/**
+	 * 根据微信账号唯一标识查询该用户信息
+	 * @param unionId
+	 * @return
+	 */
+	public UserInfo getUserInfoByUnionId(String unionId);
+	
+	/**
+	 * 用户登录
+	 * @param userName
+	 * @param password
+	 * @return
+	 */
+	public UserInfo login(String userName, String password);
 }

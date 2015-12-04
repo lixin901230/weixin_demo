@@ -22,8 +22,8 @@ DROP TABLE IF EXISTS `user_info`;
 
 CREATE TABLE `user_info` (
   `id` varchar(50) NOT NULL COMMENT '主键',
-  `userName` varchar(50) DEFAULT NULL COMMENT '用户名',
-  `password` varchar(50) DEFAULT NULL COMMENT '密码',
+  `userName` varchar(50) NOT NULL COMMENT '用户名',
+  `password` varchar(50) NOT NULL COMMENT '密码',
   `trueName` varchar(50) DEFAULT NULL COMMENT '真实姓名',
   `unionId` varchar(50) DEFAULT NULL COMMENT '微信用户唯一标示',
   `nickName` varchar(50) DEFAULT NULL COMMENT '昵称',
@@ -31,7 +31,9 @@ CREATE TABLE `user_info` (
   `email` varchar(50) DEFAULT NULL COMMENT '邮箱',
   `phone` varchar(50) DEFAULT NULL COMMENT '手机号',
   `validFlag` varchar(4) DEFAULT NULL COMMENT '有效标记，0：无效；1：有效；2：挂起',
-  PRIMARY KEY (`id`)
+  `createDate` datetime DEFAULT NULL COMMENT '创建日期',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `unionId_index` (`unionId`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户信息表';
 
 /*Data for the table `user_info` */

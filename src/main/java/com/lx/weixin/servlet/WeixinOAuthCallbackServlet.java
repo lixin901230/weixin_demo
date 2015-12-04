@@ -47,8 +47,6 @@ public class WeixinOAuthCallbackServlet extends HttpServlet {
 	
 	private String unionId = "";	//微信账号唯一标示
 	
-	private String redirectUrl;	//微信平台第三方网页授权成功并回调我们的平台进行重定向跳转进入我们的微站
-	
 	public static void main(String[] args) throws Exception {
 		String url = URLEncoder.encode("http://www.lixinsj.com.cn/weixin/wxOAuthCallback.do", "UTF-8");
 		System.out.println(url);
@@ -82,8 +80,7 @@ public class WeixinOAuthCallbackServlet extends HttpServlet {
 		try {
 			
 			String forwardPageName = wxOauthCallback(request);
-			request.setAttribute("redirectUrl", redirectUrl);	//将跳转地址传入到自动登录页面，登录成功后重定向到登录后的我的主页
-			String forwardUrl = "/page/weixin/open/"+ forwardPageName +".html";
+			String forwardUrl = "/page/weixin/open/"+ forwardPageName +".jsp";
 			request.getRequestDispatcher(forwardUrl).forward(request, response);
 			
 		} catch (Exception e) {
@@ -121,9 +118,6 @@ public class WeixinOAuthCallbackServlet extends HttpServlet {
 			        	// 微信公众号进入mooc微站，检查该微信用户是否与mooc微站平台账号绑定，已绑定用户将自动登录后进入mooc首页，未注册用户 或 未与微信公众号union绑定的用户不进行登录直接进入mooc首页
 			        	UserInfo user = userLoginRegsiterService.getUserInfoByUnionId(unionId);
 			        	if(user != null) {
-				        	if (WeixinConst.WEIXIN_LOGIN_STATE.equals(state)) {
-				        		redirectUrl = "/page/weixin/auth/myIndex.jsp";	//自动登录成功后重定向的地址
-				        	} 
 				        	return "autologin";	//去自动登录
 			        	}
 			        	if (WeixinConst.WEIXIN_LOGIN_STATE.equals(state)) {

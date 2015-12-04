@@ -1,6 +1,7 @@
 package com.lx.weixin.spring.bean;
 
 import java.io.Serializable;
+import java.util.Date;
 
 
 /**
@@ -21,7 +22,28 @@ public class UserInfo implements Serializable {
 	private String email;		//邮箱
 	private String phone;		//手机
 	private String validFlag;	//有效标记；0：无效；1：有效；挂起
+	private Date createDate;	//创建日期
 	
+	public UserInfo() {
+		
+	}
+
+	public UserInfo(String id, String userName, String password,
+			String trueName, String unionId, String nickName, String sex,
+			String email, String phone, String validFlag, Date createDate) {
+		this.id = id;
+		this.userName = userName;
+		this.password = password;
+		this.trueName = trueName;
+		this.unionId = unionId;
+		this.nickName = nickName;
+		this.sex = sex;
+		this.email = email;
+		this.phone = phone;
+		this.validFlag = validFlag;
+		this.createDate = createDate;
+	}
+
 	public String getId() {
 		return id;
 	}
@@ -81,6 +103,12 @@ public class UserInfo implements Serializable {
 	}
 	public void setValidFlag(String validFlag) {
 		this.validFlag = validFlag;
+	}
+	public Date getCreateDate() {
+		return createDate;
+	}
+	public void setCreateDate(Date createDate) {
+		this.createDate = createDate;
 	}
 	
 }
