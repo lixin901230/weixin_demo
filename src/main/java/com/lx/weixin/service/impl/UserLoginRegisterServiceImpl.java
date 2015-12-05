@@ -21,15 +21,63 @@ public class UserLoginRegisterServiceImpl implements IUserLoginRegsiterService {
 	@Override
 	public int saveUser(Map<String, Object> params) {
 		
-		String sql = "";
-		int flag = userLoginRegsiterDao.saveUser(sql, params);
+		StringBuffer sb = new StringBuffer();sb.append("	");
+		sb.append("	INSERT INTO user_info (");
+		sb.append("		id,                ");
+		sb.append("		userName,          ");
+		sb.append("		PASSWORD,          ");
+		sb.append("		trueName,          ");
+		sb.append("		unionId,           ");
+		sb.append("		nickName,          ");
+		sb.append("		sex,               ");
+		sb.append("		email,             ");
+		sb.append("		phone,             ");
+		sb.append("		validFlag,         ");
+		sb.append("		createDate         ");
+		sb.append("	) VALUES (             ");
+		sb.append("		':id',             ");
+		sb.append("		':userName',       ");
+		sb.append("		':password',       ");
+		sb.append("		':trueName',       ");
+		sb.append("		':unionId',        ");
+		sb.append("		':nickName',       ");
+		sb.append("		':sex',            ");
+		sb.append("		':email',          ");
+		sb.append("		':phone',          ");
+		sb.append("		':validFlag',      ");
+		sb.append("		':createDate')	   ");
+		int flag = userLoginRegsiterDao.saveUser(sb.toString(), params);
 		return flag;
 	}
 
 	@Override
 	public int saveUser(UserInfo userInfo) {
-		String sql = "";
-		int flag = userLoginRegsiterDao.saveUser(sql, userInfo);
+		StringBuffer sb = new StringBuffer();sb.append("	");
+		sb.append("	INSERT INTO user_info (");
+		sb.append("		id,                ");
+		sb.append("		userName,          ");
+		sb.append("		PASSWORD,          ");
+		sb.append("		trueName,          ");
+		sb.append("		unionId,           ");
+		sb.append("		nickName,          ");
+		sb.append("		sex,               ");
+		sb.append("		email,             ");
+		sb.append("		phone,             ");
+		sb.append("		validFlag,         ");
+		sb.append("		createDate         ");
+		sb.append("	) VALUES (             ");
+		sb.append("		':id',             ");
+		sb.append("		':userName',       ");
+		sb.append("		':password',       ");
+		sb.append("		':trueName',       ");
+		sb.append("		':unionId',        ");
+		sb.append("		':nickName',       ");
+		sb.append("		':sex',            ");
+		sb.append("		':email',          ");
+		sb.append("		':phone',          ");
+		sb.append("		':validFlag',      ");
+		sb.append("		':createDate')	   ");
+		int flag = userLoginRegsiterDao.saveUser(sb.toString(), userInfo);
 		return flag;
 	}
 
