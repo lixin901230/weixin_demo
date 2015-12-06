@@ -38,6 +38,8 @@ CREATE TABLE `user_info` (
 
 /*Data for the table `user_info` */
 
+insert  into `user_info`(`id`,`userName`,`password`,`trueName`,`unionId`,`nickName`,`sex`,`email`,`phone`,`validFlag`,`createDate`) values ('1','1','1','1','oyY15uJvI9eSh5jcr1wFIyM2NmHg','1','1','1','1','1','2015-12-07 00:18:16');
+
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
 /*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
