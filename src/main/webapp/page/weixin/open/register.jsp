@@ -10,7 +10,22 @@
 
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resource/jquery-1.9.1.min.js"></script>
 	<script type="text/javascript">
-		"/page/weixin/open/autologin.html"
+		"/page/weixin/open/index.jsp"
+		$(function(){
+			
+			$.ajax({
+				url: '',
+				type: 'post',
+				data: {},
+				dataType: 'json',
+				async: false,
+				cache: false,
+				success: function(data){
+					
+				},
+				error: function(){alrt("注册请求操作失败！")}
+			});	
+		});
 	</script>
 </body>
 </html>
