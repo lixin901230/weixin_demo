@@ -182,8 +182,12 @@ public class LoginRegsiterServlet extends HttpServlet {
 			request.getSession().setAttribute(CURRENT_LOGIN_USER, user);
 		}
 		
-		Map<String, Object> resultMap = ResultHandle.getResultMap(success, errorMsg);
-		JsonUtil.writeJsonStr(response, JsonUtil.objToStr(resultMap));
+		try {
+			Map<String, Object> resultMap = ResultHandle.getResultMap(success, errorMsg);
+			JsonUtil.writeJsonStr(response, JsonUtil.objToStr(resultMap));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**

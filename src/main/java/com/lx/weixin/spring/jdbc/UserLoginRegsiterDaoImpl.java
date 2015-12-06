@@ -7,7 +7,9 @@ import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
@@ -75,7 +77,8 @@ public class UserLoginRegsiterDaoImpl implements IUserLoginRegsiterDao {
 			sb.append("		user_info usr          ");
 			sb.append("	WHERE                      ");
 			sb.append("		usr.unionId = :unionId ");
-			UserInfo userInfo = namedParameterJdbcTemplate.queryForObject(sb.toString(), paramMap, UserInfo.class);
+			RowMapper<UserInfo> rowMapper = new BeanPropertyRowMapper<UserInfo>(UserInfo.class);
+			UserInfo userInfo = namedParameterJdbcTemplate.queryForObject(sb.toString(), paramMap, rowMapper);
 			return userInfo;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -115,7 +118,8 @@ public class UserLoginRegsiterDaoImpl implements IUserLoginRegsiterDao {
 			sb.append("	AND usr.password = :password ");
 		}
 		try {
-			userInfo = namedParameterJdbcTemplate.queryForObject(sb.toString(), paramMap, UserInfo.class);
+			RowMapper<UserInfo> rowMapper = new BeanPropertyRowMapper<UserInfo>(UserInfo.class);
+			userInfo = namedParameterJdbcTemplate.queryForObject(sb.toString(), paramMap, rowMapper);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -132,7 +136,7 @@ public class UserLoginRegsiterDaoImpl implements IUserLoginRegsiterDao {
 		Map<String, String> paramMap = new HashMap<String, String>();
 		paramMap.put("userId", userId);
 		paramMap.put("unionId", unionId);
-		String sql = "UPDATE user_info SET unionId=':unionId' WHERE id=':userId'";
+		String sql = "UPDATE user_info SET unionId=:unionId WHERE id=:userId";
 		return namedParameterJdbcTemplate.update(sql, paramMap);
 	}
 }

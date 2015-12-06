@@ -7,6 +7,6 @@
 	<title>我的首页（已登录）</title>
 </head>
 <body>
-	<div style="font-size: 45px;">李鑫的微信网站首页（微信第三方网页授权认证成功）<div>
+	<div style="font-size: 45px;">通过微信UnionId自动登录成功，已进入李鑫的微信网站首页（微信第三方网页授权认证成功）<div>
 </body>
 </html>
