@@ -55,9 +55,15 @@ public class JsonUtil {
 	 * @param jsonStr
 	 * @return
 	 */
-	public static JSONObject jsonStrToJsonObject(String jsonStr) {
+	public static JSONObject strToJson(String jsonStr) {
 		
 		try {
+			if(jsonStr.indexOf("[") > -1) {
+				jsonStr = jsonStr.replaceAll("\\[", "\\\\[");
+			}
+			if(jsonStr.indexOf("]") > -1) {
+				jsonStr = jsonStr.replaceAll("\\]", "\\\\]");
+			}
 			JSONObject jsonObject = JSONObject.fromObject(jsonStr);
 			return jsonObject;
 		} catch (Exception e) {

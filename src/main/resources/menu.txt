@@ -6,7 +6,7 @@
      {	
           "type":"view",
           "name":"关于我们",
-          "url":"https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx70b0d2dbde434838&redirect_uri=http%3A%2F%2Fwww.lixinsj.com.cn%2Fweixin%2Fabout.jsp&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect"
+          "url":"https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx70b0d2dbde434838&redirect_uri=http%3A%2F%2Fwww.lixinsj.com.cn%2Fweixin%2Fpage%2Fweixin%2Fopen%2Fabout.jsp&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect"
       },
       {	
           "type":"view",

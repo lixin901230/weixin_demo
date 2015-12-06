@@ -49,8 +49,31 @@ public class LoginRegsiterServlet extends HttpServlet {
 
 	@Override
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String method = request.getParameter("method");
 		
+		dispatchMethod(request, response);
+	}
+	
+	/**
+	 * 分发请求
+	 * @param request
+	 * @param response
+	 */
+	public void dispatchMethod(HttpServletRequest request, HttpServletResponse response) {
+		String method = request.getParameter("method");
+		if(StringUtils.isEmpty(method)) {	
+			String requestURI = request.getRequestURI();
+			StringBuffer requestURL = request.getRequestURL();
+			System.out.println("requestURI="+requestURI+"\nrequestURL="+requestURL);
+			int paramsIndex = requestURL.indexOf("?");
+			String urlTemp = "";
+			if(paramsIndex > -1) {
+				urlTemp = requestURL.substring(0, paramsIndex);
+				String urlTempPart = urlTemp.substring(urlTemp.lastIndexOf("/"));
+				if(urlTempPart.lastIndexOf("_") > -1) {
+					method = urlTempPart.substring(urlTempPart.lastIndexOf("_"));
+				}
+			}
+		}
 		if("register".equals(method)) {	//注册
 			register(request, response);
 		} else if("login".equals(method)) {	//登录

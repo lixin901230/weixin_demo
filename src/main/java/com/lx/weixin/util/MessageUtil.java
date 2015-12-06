@@ -167,7 +167,7 @@ public class MessageUtil {
 			int state = httpClient.executeMethod(postMethod);
 			if(state == 200) {
 				String respBody = postMethod.getResponseBodyAsString();
-				jsonObject = JsonUtil.jsonStrToJsonObject(respBody);
+				jsonObject = JsonUtil.strToJson(respBody);
 				if(!jsonObject.has("errcode")) {
 					System.out.println("图片上传成功！");
 				}
@@ -222,7 +222,7 @@ public class MessageUtil {
 			int state = httpClient.executeMethod(postMethod);
 			if(state == 200) {
 				String respBody = postMethod.getResponseBodyAsString();
-				jsonObject = JsonUtil.jsonStrToJsonObject(respBody);
+				jsonObject = JsonUtil.strToJson(respBody);
 				if(!jsonObject.has("errcode")) {
 					System.out.println("语音上传成功！");
 				}
@@ -342,7 +342,7 @@ public class MessageUtil {
 			int state = httpClient.executeMethod(postMethod);
 			if(state == 200) {
 				String respBody = postMethod.getResponseBodyAsString();
-				jsonObject = JsonUtil.jsonStrToJsonObject(respBody);
+				jsonObject = JsonUtil.strToJson(respBody);
 				if(!jsonObject.has("errcode")) {
 					System.out.println("音乐消息缩略图上传成功！");
 				}

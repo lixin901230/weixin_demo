@@ -24,6 +24,7 @@ import com.lx.weixin.httpClient.HttpClientUtil;
 import com.lx.weixin.service.IUserLoginRegsiterService;
 import com.lx.weixin.spring.bean.UserInfo;
 import com.lx.weixin.spring.util.ApplicationContextHelper;
+import com.lx.weixin.util.JsonUtil;
 import com.lx.weixin.util.LoadWeixinPropertiesConfig;
 import com.lx.weixin.util.WeixinConst;
 
@@ -55,16 +56,17 @@ public class WeixinOAuthCallbackServlet extends HttpServlet {
 	@Override
 	public void init() throws ServletException {
 		try {
-			userLoginRegsiterService = (IUserLoginRegsiterService) ApplicationContextHelper.getBean("userLoginRegsiterService");
-			if(userLoginRegsiterService == null) {
-				throw new Exception("初始化 IUserLoginRegsiterService bean 失败");
-			}
 			
 			Properties properties = LoadWeixinPropertiesConfig.getInstance().getConfig();
 			if(properties != null) {
 				APPID = properties.getProperty("appid");
 				APP_SECRET = properties.getProperty("appsecret");
 				GRANT_TYPE = properties.getProperty("grant_type");
+			}
+
+			userLoginRegsiterService = (IUserLoginRegsiterService) ApplicationContextHelper.getBean("userLoginRegsiterService");
+			if(userLoginRegsiterService == null) {
+				throw new Exception("初始化 IUserLoginRegsiterService bean 失败");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -163,7 +165,8 @@ public class WeixinOAuthCallbackServlet extends HttpServlet {
 			String responseBody = null;
 			if(stateCode == 200) {
 				responseBody = method.getResponseBodyAsString();
-				JSONObject accessTokenJson = JSONObject.fromObject(responseBody);
+				
+				JSONObject accessTokenJson = JsonUtil.strToJson(responseBody);
 				Object errcode = accessTokenJson.get("errcode");
 				if(errcode == null) {
 					return accessTokenJson;
@@ -204,7 +207,11 @@ public class WeixinOAuthCallbackServlet extends HttpServlet {
 			int stateCode = httpClient.executeMethod(method);
 			if(stateCode == 200) {
 				String responseBody = method.getResponseBodyAsString();
-				JSONObject accessTokenJson = JSONObject.fromObject(responseBody);
+				if(responseBody.indexOf("[") > -1) {
+					responseBody = responseBody.replaceAll("\\[", "\\\\[").replaceAll("\\]", "\\\\]");
+				}
+
+				JSONObject accessTokenJson = JsonUtil.strToJson(responseBody);
 				String errcode = accessTokenJson.getString("errcode");
 				if(StringUtils.isNotBlank(errcode) && "0".endsWith(errcode)) {
 					return true;
@@ -222,4 +229,5 @@ public class WeixinOAuthCallbackServlet extends HttpServlet {
 		logger.error("验证微信网页授权access_token失败");
 		return false;
 	}
+	
 }

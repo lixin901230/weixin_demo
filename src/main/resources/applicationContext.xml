@@ -22,4 +22,6 @@
 	<!-- 导入springjdbc注入配置 -->
 	<import resource="applicationContext-jdbc.xml"/>
 	
+	<import resource="applicationContext-bean.xml"/>
+	
 </beans>

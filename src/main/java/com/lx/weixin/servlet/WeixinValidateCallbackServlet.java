@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang.StringUtils;
 import org.dom4j.DocumentException;
 
 import com.lx.weixin.bean.TextMessage;
@@ -172,8 +173,9 @@ public class WeixinValidateCallbackServlet extends HttpServlet {
 			}
 			
 			System.out.println("回复消息内容：\n"+xmlMessage);
-			
-			writer.write(xmlMessage);
+			if(StringUtils.isNotBlank(xmlMessage)) {
+				writer.write(xmlMessage);
+			}
 		} catch (DocumentException e) {
 			e.printStackTrace();
 		} finally {

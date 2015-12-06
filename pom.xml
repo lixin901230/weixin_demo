@@ -33,6 +33,11 @@
 	  	<artifactId>servlet-api</artifactId>
 	  	<version>2.5</version>
 	</dependency>
+	<dependency>
+	  	<groupId>taglibs</groupId>
+	  	<artifactId>standard</artifactId>
+	  	<version>1.1.2</version>
+	</dependency>
   
   	<!-- zxing二维码图片生成及解析依赖 -->
 	<dependency>  
@@ -79,6 +84,20 @@
 		<version>3.0.1</version>
 	</dependency>
 	
+	<!-- 数据库连接 -->
+	<dependency>
+	  <groupId>mysql</groupId>
+	  <artifactId>mysql-connector-java</artifactId>
+	  <version>5.1.9</version>
+	</dependency>
+	
+	<!-- 连接池 -->
+	<dependency>
+	  <groupId>c3p0</groupId>
+	  <artifactId>c3p0</artifactId>
+	  <version>0.9.1.2</version>
+	</dependency>
+	
 	<!-- 工具包 依赖 -->
 	<dependency>
 		<groupId>commons-lang</groupId>
@@ -103,7 +122,7 @@
 	<dependency>
 		<groupId>commons-collections</groupId>
   		<artifactId>commons-collections</artifactId>
-  		<version>2.1</version>
+  		<version>3.2</version>
 	</dependency>
 	<dependency>
 		<groupId>commons-beanutils</groupId>
@@ -243,6 +262,54 @@
   </dependencies>
   
   <!-- 构建配置 -->
+  <profiles>
+  	<!-- 本地开发环境配置，默认激活 -->
+  	<profile>
+  		<id>dev_local</id>
+  		<activation>
+  			<activeByDefault>true</activeByDefault>
+  		</activation>
+  		<properties>
+  			<db.type>mysql</db.type>
+			<db.driver>com.mysql.jdbc.Driver</db.driver>
+			<db.url>jdbc:mysql://localhost:3306/weixin_demo?useUnicode=true&amp;characterEncoding=UTF-8</db.url>
+			<db.userName>root</db.userName>
+			<db.pwd>admin</db.pwd>
+			<outputDirectory>${project.basedir}/src/main/webapp/WEB-INF/classes</outputDirectory>
+			<libOutputDirectory>${project.basedir}/src/main/webapp/WEB-INF/lib</libOutputDirectory>
+			<skip>false</skip>
+			<skiplibcopy>false</skiplibcopy>
+			<memcache.url>127.0.0.1:11211</memcache.url>
+			<redis.url>127.0.0.1:6379 </redis.url>
+  		</properties>
+  	</profile>
+  	
+  	<!-- 测试环境配置，通过属性配置文件激活，属性配置文件中配置test=open时激活test环境配置 -->
+  	<profile>
+  		<id>test</id>
+  		<activation>
+  			<property>
+  				<name>test</name>
+  				<value>open</value>
+  			</property>
+  		</activation>
+  		<properties>
+  			<db.type>mysql</db.type>
+			<db.driver>com.mysql.jdbc.Driver</db.driver>
+			<db.url>jdbc:mysql://localhost:3306/weixin_demo?useUnicode=true&amp;characterEncoding=UTF-8</db.url>
+			<db.userName>root</db.userName>
+			<db.pwd>admin</db.pwd>
+			<outputDirectory>${project.basedir}/src/main/webapp/WEB-INF/classes</outputDirectory>
+			<libOutputDirectory>${project.basedir}/src/main/webapp/WEB-INF/lib</libOutputDirectory>
+			<skip>true</skip>
+			<skiplibcopy>true</skiplibcopy>
+			<memcache.url>127.0.0.1:11211</memcache.url>
+			<redis.url>127.0.0.1:6379 </redis.url>
+  		</properties>
+  	</profile>
+  </profiles>
+  
+  <!-- 构建配置 -->
   <build>
     <finalName>${finalName}</finalName>
     <outputDirectory>${classpath}</outputDirectory>
@@ -286,7 +353,7 @@
    	<plugins>
    		
    		<!-- mvn clean -->
-   		<plugin>
+   		<!-- <plugin>
 			<artifactId>maven-antrun-plugin</artifactId>
 			<executions>
 				<execution>
@@ -303,7 +370,7 @@
 					</goals>
 				</execution>
 			</executions>
-		</plugin>
+		</plugin> -->
 		
 		<!-- 测试 -->
 		<plugin>

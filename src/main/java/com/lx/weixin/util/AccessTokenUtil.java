@@ -50,7 +50,7 @@ public class AccessTokenUtil {
 			int state = httpClient.executeMethod(method);
 			if(state == 200) {
 				String respBodyStr = method.getResponseBodyAsString();
-				JSONObject jsonObject = JsonUtil.jsonStrToJsonObject(respBodyStr);
+				JSONObject jsonObject = JsonUtil.strToJson(respBodyStr);
 				String token = jsonObject.getString("access_token");
 				String expiresInStr = jsonObject.getString("expires_in");
 				accessToken = new AccessToken(token, NumberUtil.strToInteger(expiresInStr));
