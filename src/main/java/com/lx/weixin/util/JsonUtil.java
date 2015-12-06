@@ -1,5 +1,13 @@
 package com.lx.weixin.util;
 
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.http.HttpServletResponse;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import net.sf.json.JSONObject;
 
 /**
@@ -9,6 +17,22 @@ import net.sf.json.JSONObject;
  *
  */
 public class JsonUtil {
+	
+	private static Logger logger = LoggerFactory.getLogger(JsonUtil.class);
+	
+	public static void writeJsonStr(HttpServletResponse response, String jsonStr) {
+		
+		response.setCharacterEncoding("UTF-8");
+		try {
+			PrintWriter writer = response.getWriter();
+			writer.write(jsonStr);
+			writer.flush();
+			writer.close();
+		} catch (IOException e) {
+			logger.error(jsonStr+" 转换失败，原因："+e);
+			e.printStackTrace();
+		}
+	}
 
 	/**
 	 * 将对象转为json字符串
@@ -16,9 +40,14 @@ public class JsonUtil {
 	 * @return
 	 */
 	public static String objToStr(Object obj) {
-		JSONObject jsonObject = JSONObject.fromObject(obj);
-		String jsonStr = jsonObject.toString();
-		return jsonStr;
+		try {
+			JSONObject jsonObject = JSONObject.fromObject(obj);
+			String jsonStr = jsonObject.toString();
+			return jsonStr;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 	
 	/**
@@ -28,7 +57,12 @@ public class JsonUtil {
 	 */
 	public static JSONObject jsonStrToJsonObject(String jsonStr) {
 		
-		JSONObject jsonObject = JSONObject.fromObject(jsonStr);
-		return jsonObject;
+		try {
+			JSONObject jsonObject = JSONObject.fromObject(jsonStr);
+			return jsonObject;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 }

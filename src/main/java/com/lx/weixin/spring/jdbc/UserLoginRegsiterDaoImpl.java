@@ -7,7 +7,6 @@ import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -79,13 +78,61 @@ public class UserLoginRegsiterDaoImpl implements IUserLoginRegsiterDao {
 			UserInfo userInfo = namedParameterJdbcTemplate.queryForObject(sb.toString(), paramMap, UserInfo.class);
 			return userInfo;
 		} catch (Exception e) {
-			logger.error("getUserInfoByUnionId(String unionId) call fail，原因："+e);
 			e.printStackTrace();
 		}
 		return null;
 	}
 	
-	public UserInfo login(String userName, String password) {
-		return null;
+	public UserInfo getUserInfo(String userName) {
+		return getUserInfo(userName, null);
+	}
+	
+	public UserInfo getUserInfo(String userName, String password) {
+		
+		UserInfo userInfo = null;
+		Map<String, String> paramMap = new HashMap<String, String>();
+		paramMap.put("userName", userName);
+		paramMap.put("password", password);
+		
+		StringBuffer sb = new StringBuffer();
+		sb.append("	SELECT                     ");
+		sb.append("		usr.id,                ");
+		sb.append("		usr.userName,          ");
+		sb.append("		usr.`password`,        ");
+		sb.append("		usr.trueName,          ");
+		sb.append("		usr.unionId,           ");
+		sb.append("		usr.nickName,          ");
+		sb.append("		usr.sex,               ");
+		sb.append("		usr.phone,             ");
+		sb.append("		usr.email,             ");
+		sb.append("		usr.validFlag,         ");
+		sb.append("		usr.createDate         ");
+		sb.append("	FROM                       ");
+		sb.append("		user_info usr          ");
+		sb.append("	WHERE                      ");
+		sb.append("		usr.userName = :userName ");
+		if(StringUtils.isNotEmpty(password)) {
+			sb.append("	AND usr.password = :password ");
+		}
+		try {
+			userInfo = namedParameterJdbcTemplate.queryForObject(sb.toString(), paramMap, UserInfo.class);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return userInfo;
+	}
+	
+	/**
+	 * 更新用户微信唯一标识UnionId
+	 * @param userId
+	 * @return
+	 */
+	public int updateUserUnionId(String userId, String unionId) {
+		
+		Map<String, String> paramMap = new HashMap<String, String>();
+		paramMap.put("userId", userId);
+		paramMap.put("unionId", unionId);
+		String sql = "UPDATE user_info SET unionId=':unionId' WHERE id=':userId'";
+		return namedParameterJdbcTemplate.update(sql, paramMap);
 	}
 }

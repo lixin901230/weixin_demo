@@ -33,10 +33,25 @@ public interface IUserLoginRegsiterService {
 	public UserInfo getUserInfoByUnionId(String unionId);
 	
 	/**
-	 * 用户登录
+	 * 根据用户名和密码查询用户
+	 * @param userName
+	 * @return
+	 */
+	public UserInfo getUserInfo(String userName);
+	
+	/**
+	 * 根据用户名和密码查询用户
 	 * @param userName
 	 * @param password
 	 * @return
 	 */
-	public UserInfo login(String userName, String password);
+	public UserInfo getUserInfo(String userName, String password);
+	
+	/**
+	 * 更新用户微信唯一标识UnionId
+	 * @param userId
+	 * @param unionId
+	 * @return
+	 */
+	public int updateUserUnionId(String userId, String unionId);
 }

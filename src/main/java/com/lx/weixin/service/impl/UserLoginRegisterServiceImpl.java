@@ -2,6 +2,7 @@ package com.lx.weixin.service.impl;
 
 import java.util.Map;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.lx.weixin.service.IUserLoginRegsiterService;
@@ -87,7 +88,17 @@ public class UserLoginRegisterServiceImpl implements IUserLoginRegsiterService {
 	}
 	
 	@Override
-	public UserInfo login(String userName, String password) {
-		return userLoginRegsiterDao.login(userName, password);
+	public UserInfo getUserInfo(String userName) {
+		return userLoginRegsiterDao.getUserInfo(userName, null);
+	}
+	
+	@Override
+	public UserInfo getUserInfo(String userName, String password) {
+		return userLoginRegsiterDao.getUserInfo(userName, password);
+	}
+	
+	@Override
+	public int updateUserUnionId(String userId, String unionId) {
+		return userLoginRegsiterDao.updateUserUnionId(userId, unionId);
 	}
 }
