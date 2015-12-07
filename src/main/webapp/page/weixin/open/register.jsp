@@ -44,7 +44,7 @@
 	        	<!-- 手机注册 -->
 	            <div class="aTab_con" id="aTab_con_1" style="display:block;">
 	                <div class="form_box"><i class="iconfont form_ico login_phone"></i>
-	                	<input name="phone" id="phone" type="text" value="手机号" class="form_input" onfocus="if(this.value=='手机号') this.value=''; this.style.color='#5d5d5d'" onblur="if(this.value=='') this.value='手机号'; this.style.color='#cfcfcf'" >
+	                	<input name="userName" id="userName" type="text" value="账号" class="form_input" onfocus="if(this.value=='账号') this.value=''; this.style.color='#5d5d5d'" onblur="if(this.value=='') this.value='账号'; this.style.color='#cfcfcf'" >
 	                </div>
 	                <div class="form_box"><i class="iconfont form_ico login_pwd"></i>
 	                	<input name="password" id="password" type="password" class="form_input"/>

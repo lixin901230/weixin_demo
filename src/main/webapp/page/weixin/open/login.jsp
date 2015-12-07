@@ -19,7 +19,7 @@
 	    	<h2 class="tit1 p30_0 tc bb_d">登录</h2>
 	        
 	        <div class="form_box"><i class="iconfont form_ico login_user"></i>
-	        	<input name="loginId" id="loginId" type="text" value="手机号" class="form_input" onfocus="if(this.value=='手机号') this.value=''; this.style.color='#5d5d5d'" onblur="if(this.value=='') this.value='手机号'; this.style.color='#cfcfcf'" >
+	        	<input name="userName" id="userName" type="text" value="账号" class="form_input" onfocus="if(this.value=='账号') this.value=''; this.style.color='#5d5d5d'" onblur="if(this.value=='') this.value='账号'; this.style.color='#cfcfcf'" >
 	        </div>
 	        <div class="form_box"><i class="iconfont form_ico login_pwd"></i>
 	        	<input name="password" id="password" type="password" class="form_input" />

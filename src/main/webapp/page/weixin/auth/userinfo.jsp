@@ -8,10 +8,6 @@
 </head>
 <body>
 	<div style="font-size: 45px;">通过微信UnionId自动登录成功，已进入李鑫的微信网站首页（微信第三方网页授权认证成功）<div>
-	<div style="font-size: 45px;">当前登录用户：<a href="#">${session_user.userName}</a></div>
-	<div style="font-size: 45px;" id="info">
-		用户名：${session_user.userName}<br/>
-		用户绑定的微信账号唯一标识：${session_user.unionId}
-	</div>
+	<div style="font-size: 45px;">当前登录用户：${session_user.userName}</div>
 </body>
 </html>
