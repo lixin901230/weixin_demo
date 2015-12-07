@@ -2,7 +2,6 @@ package com.lx.weixin.service.impl;
 
 import java.util.Map;
 
-import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.lx.weixin.service.IUserLoginRegsiterService;
@@ -22,7 +21,7 @@ public class UserLoginRegisterServiceImpl implements IUserLoginRegsiterService {
 	@Override
 	public int saveUser(Map<String, Object> params) {
 		
-		StringBuffer sb = new StringBuffer();sb.append("	");
+		StringBuffer sb = new StringBuffer();
 		sb.append("	INSERT INTO user_info (");
 		sb.append("		id,                ");
 		sb.append("		userName,          ");
@@ -36,24 +35,25 @@ public class UserLoginRegisterServiceImpl implements IUserLoginRegsiterService {
 		sb.append("		validFlag,         ");
 		sb.append("		createDate         ");
 		sb.append("	) VALUES (             ");
-		sb.append("		':id',             ");
-		sb.append("		':userName',       ");
-		sb.append("		':password',       ");
-		sb.append("		':trueName',       ");
-		sb.append("		':unionId',        ");
-		sb.append("		':nickName',       ");
-		sb.append("		':sex',            ");
-		sb.append("		':email',          ");
-		sb.append("		':phone',          ");
-		sb.append("		':validFlag',      ");
-		sb.append("		':createDate')	   ");
+		sb.append("		:id,             ");
+		sb.append("		:userName,       ");
+		sb.append("		:password,       ");
+		sb.append("		:trueName,       ");
+		sb.append("		:unionId,        ");
+		sb.append("		:nickName,       ");
+		sb.append("		:sex,            ");
+		sb.append("		:email,          ");
+		sb.append("		:phone,          ");
+		sb.append("		:validFlag,      ");
+		sb.append("		:createDate)	   ");
 		int flag = userLoginRegsiterDao.saveUser(sb.toString(), params);
 		return flag;
 	}
 
 	@Override
 	public int saveUser(UserInfo userInfo) {
-		StringBuffer sb = new StringBuffer();sb.append("	");
+		
+		StringBuffer sb = new StringBuffer();
 		sb.append("	INSERT INTO user_info (");
 		sb.append("		id,                ");
 		sb.append("		userName,          ");
@@ -67,17 +67,17 @@ public class UserLoginRegisterServiceImpl implements IUserLoginRegsiterService {
 		sb.append("		validFlag,         ");
 		sb.append("		createDate         ");
 		sb.append("	) VALUES (             ");
-		sb.append("		':id',             ");
-		sb.append("		':userName',       ");
-		sb.append("		':password',       ");
-		sb.append("		':trueName',       ");
-		sb.append("		':unionId',        ");
-		sb.append("		':nickName',       ");
-		sb.append("		':sex',            ");
-		sb.append("		':email',          ");
-		sb.append("		':phone',          ");
-		sb.append("		':validFlag',      ");
-		sb.append("		':createDate')	   ");
+		sb.append("		:id,             ");
+		sb.append("		:userName,       ");
+		sb.append("		:password,       ");
+		sb.append("		:trueName,       ");
+		sb.append("		:unionId,        ");
+		sb.append("		:nickName,       ");
+		sb.append("		:sex,            ");
+		sb.append("		:email,          ");
+		sb.append("		:phone,          ");
+		sb.append("		:validFlag,      ");
+		sb.append("		:createDate)	   ");
 		int flag = userLoginRegsiterDao.saveUser(sb.toString(), userInfo);
 		return flag;
 	}
