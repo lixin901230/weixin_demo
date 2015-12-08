@@ -82,6 +82,33 @@ public class LoginRegsiterServlet extends HttpServlet {
 	}
 	
 	/**
+	 * 检测注册的用户名是否已存在
+	 * @param request
+	 * @param response
+	 */
+	public void checkUserNameIsExist(HttpServletRequest request, HttpServletResponse response) {
+		
+		boolean success = false;	//false：已存在，不可用；true：不存在，可用；默认用户名已存在
+		String errorMsg = "";
+		
+		String userName = request.getParameter("userName");
+		try {
+			
+			UserInfo userInfo = userLoginRegsiterService.getUserInfo(userName);
+			if(userInfo == null) {
+				success = true;
+			} else {
+				errorMsg = "用户名已被注册";
+			}
+		} catch (Exception e) {
+			logger.error("用户"+userName+"检测唯一性失败，原因："+e);
+			e.printStackTrace();
+		}
+		Map<String, Object> resultMap = ResultHandle.getResultMap(success, errorMsg);
+		JsonUtil.writeJsonStr(response, JsonUtil.objToStr(resultMap));
+	}
+	
+	/**
 	 * 用户注册
 	 */
 	public void register(HttpServletRequest request, HttpServletResponse response) {
