@@ -4,10 +4,10 @@
 <html>
 <head>
 	<base href="${ctx}"/>	<!-- 若不加，则在include中引用相对路径后，在使用浏览器后退或手机物理返回时会出现路径错误问题 -->
-	<title>用户登录</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<meta name="viewport" content="width=750, target-densitydpi=device-dpi, user-scalable=no">
 	<%@ include file="../common/head.jsp"%>
+	<title>用户登录</title>
 </head>
 <body>
 	<div class="auto">
@@ -19,7 +19,7 @@
 	    	<h2 class="tit1 p30_0 tc bb_d">登录</h2>
 	        
 	        <div class="form_box"><i class="iconfont form_ico login_user"></i>
-	        	<input name="userName" id="userName" type="text" value="账号" class="form_input" onfocus="if(this.value=='账号') this.value=''; this.style.color='#5d5d5d'" onblur="if(this.value=='') this.value='账号'; this.style.color='#cfcfcf'" >
+	        	<input name="userName" id="userName" type="text" value="用户名" class="form_input" onfocus="if(this.value=='用户名') this.value=''; this.style.color='#5d5d5d'" onblur="if(this.value=='') this.value='用户名'; this.style.color='#cfcfcf'" >
 	        </div>
 	        <div class="form_box"><i class="iconfont form_ico login_pwd"></i>
 	        	<input name="password" id="password" type="password" class="form_input" />

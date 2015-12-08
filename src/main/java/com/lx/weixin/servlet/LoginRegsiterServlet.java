@@ -1,7 +1,10 @@
 package com.lx.weixin.servlet;
 
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.ServletException;
@@ -59,8 +62,8 @@ public class LoginRegsiterServlet extends HttpServlet {
 	 * @param response
 	 */
 	public void dispatchMethod(HttpServletRequest request, HttpServletResponse response) {
-		String method = request.getParameter("method");
-		if(StringUtils.isEmpty(method)) {	
+		String methodName = request.getParameter("method");
+		if(StringUtils.isEmpty(methodName)) {	
 			String requestURI = request.getRequestURI();
 			StringBuffer requestURL = request.getRequestURL();
 			System.out.println("requestURI="+requestURI+"\nrequestURL="+requestURL);
@@ -70,14 +73,32 @@ public class LoginRegsiterServlet extends HttpServlet {
 				urlTemp = requestURL.substring(0, paramsIndex);
 				String urlTempPart = urlTemp.substring(urlTemp.lastIndexOf("/"));
 				if(urlTempPart.lastIndexOf("_") > -1) {
-					method = urlTempPart.substring(urlTempPart.lastIndexOf("_"));
+					methodName = urlTempPart.substring(urlTempPart.lastIndexOf("_"));
 				}
 			}
 		}
-		if("register".equals(method)) {	//注册
+
+		/*try {
+			Method method = getClass().getDeclaredMethod(methodName, request.getClass(), response.getClass());
+			method.setAccessible(true);	//释放私有方法调用访问权限
+			method.invoke(getClass(), request, response);
+		} catch (NoSuchMethodException e) {
+			e.printStackTrace();
+		} catch (IllegalArgumentException e) {
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			e.printStackTrace();
+		} catch (InvocationTargetException e) {
+			e.printStackTrace();
+		}*/
+		if("register".equals(methodName)) {	//注册
 			register(request, response);
-		} else if("login".equals(method)) {	//登录
+		} else if("login".equals(methodName)) {	//登录
 			login(request, response);
+		} else if("checkUserNameIsExist".equals(methodName)) {	//检测用户唯一性
+			checkUserNameIsExist(request, response);
+		} else if("loginOut".equals(methodName)) {	//检测用户唯一性
+			loginOut(request, response);
 		}
 	}
 	
@@ -87,7 +108,6 @@ public class LoginRegsiterServlet extends HttpServlet {
 	 * @param response
 	 */
 	public void checkUserNameIsExist(HttpServletRequest request, HttpServletResponse response) {
-		
 		boolean success = false;	//false：已存在，不可用；true：不存在，可用；默认用户名已存在
 		String errorMsg = "";
 		
@@ -117,7 +137,8 @@ public class LoginRegsiterServlet extends HttpServlet {
 		String errorMsg = "";
 		
 		String id = UUIDUtil.id();
-		String unionId = request.getParameter("unionId");	//微信账号唯一标识，注册时将当前注册的账号与微信用户唯一标示UnionId进行绑定，便于自动登录
+		//String unionId = request.getParameter("unionId");	//微信账号唯一标识，注册时将当前注册的账号与微信用户唯一标示UnionId进行绑定，便于自动登录
+		String unionId = (String) request.getSession().getAttribute(WeixinConst.SESSION_UNIONID);
 		String userName = request.getParameter("userName");
 		String password = request.getParameter("password");
 		String trueName = request.getParameter("trueName");
@@ -144,7 +165,9 @@ public class LoginRegsiterServlet extends HttpServlet {
 			logger.error("用户"+userName+"注册失败，原因："+e);
 			e.printStackTrace();
 		}
-		Map<String, Object> resultMap = ResultHandle.getResultMap(success, errorMsg);
+		Map<String, String> data = new HashMap<String, String>();
+		data.put("unionId", unionId);
+		Map<String, Object> resultMap = ResultHandle.getResultMap(success, data, errorMsg);
 		JsonUtil.writeJsonStr(response, JsonUtil.objToStr(resultMap));
 	}
 	
@@ -152,7 +175,7 @@ public class LoginRegsiterServlet extends HttpServlet {
 	 * 登录
 	 */
 	public void login(HttpServletRequest request, HttpServletResponse response) {
-		
+		System.out.println(1112);
 		boolean success = false;
 		String errorMsg = "";
 		
@@ -160,19 +183,6 @@ public class LoginRegsiterServlet extends HttpServlet {
 		String unionId = (String) request.getSession().getAttribute(WeixinConst.SESSION_UNIONID);
 		String userName = request.getParameter("userName");
 		String password = request.getParameter("password");
-		/*UserInfo user = userLoginRegsiterService.getUserInfo(userName);
-		if (user != null) {
-			if(user.getPassword().equals(password)) {
-				success = true;
-				userLoginRegsiterService.updateUserUnionId(user.getId(), unionId);	//将微信账号唯一标识UnionId与微站平台用户进行绑定
-				request.getSession().setAttribute(CURRENT_LOGIN_USER, user);
-			} else if(!user.getPassword().equals(password)) {
-				errorMsg = "登录密码错误";
-				user = null;
-			}
-		} else {
-			errorMsg = "用户不存在";
-		}*/
 		
 		UserInfo user = null;
 		if(StringUtils.isNotEmpty(userName) && StringUtils.isNotEmpty(password)) {
@@ -209,12 +219,8 @@ public class LoginRegsiterServlet extends HttpServlet {
 			request.getSession().setAttribute(CURRENT_LOGIN_USER, user);
 		}
 		
-		try {
-			Map<String, Object> resultMap = ResultHandle.getResultMap(success, errorMsg);
-			JsonUtil.writeJsonStr(response, JsonUtil.objToStr(resultMap));
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		Map<String, Object> resultMap = ResultHandle.getResultMap(success, errorMsg);
+		JsonUtil.writeJsonStr(response, JsonUtil.objToStr(resultMap));
 	}
 
 	/**
@@ -224,7 +230,7 @@ public class LoginRegsiterServlet extends HttpServlet {
 	 * @throws IOException 
 	 * @throws ServletException 
 	 */
-	public void loginOut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public void loginOut(HttpServletRequest request, HttpServletResponse response) {
 		
 		UserInfo user = (UserInfo) request.getSession().getAttribute(CURRENT_LOGIN_USER);
 		
@@ -233,5 +239,8 @@ public class LoginRegsiterServlet extends HttpServlet {
 
 		//移除session
 		request.getSession().removeAttribute(CURRENT_LOGIN_USER);
+		
+		Map<String, Object> resultMap = ResultHandle.getResultMap(true, "");
+		JsonUtil.writeJsonStr(response, JsonUtil.objToStr(resultMap));
 	}
 }
