@@ -121,11 +121,8 @@ function register() {
 		cache: false,
 		success: function(data){
 			if(data && data.success) {
-				var unionId = null;
-				if(data.data.unionId) {
-					unionId = data.data.unionId;
-				}
-				login(unionId, userName, password);	//注册成功后，去用户中心自动登录
+				var unionId = data.data.unionId;
+				login(null, userName, password);	//注册成功后，去用户中心自动登录
 			}
 		},
 		error: function(){alrt("注册请求操作失败！");}
@@ -166,21 +163,21 @@ function loginSubmit() {
 	}
 	
 	password = MD5(password.replace(/\%/g, "%25").replace(/\+/g, "%2B").replace(/\&/g, "%26"));
-	login(unionId, userName, password);
+	login(null, userName, password);
 }
 
-// 去用户中心登录
+// 去登录
 function login(unionId, userName, password) {
 	
 	var params = {};
-	if(!CommonUtil.isEmpty(unionId)) {
+	/*if(!CommonUtil.isEmpty(unionId)) {
 		params["unionId"] = unionId;
-	}
+	}*/
 	if(!CommonUtil.isEmpty(userName) && !CommonUtil.isEmpty(password)) {
 		params["userName"] = userName;
 		params["password"] = password;
 	}
-	
+	alert(params);
 	$.ajax({
 		url: base + '/LoginRegsiterServlet?method=login',
 		type: 'post',
@@ -193,7 +190,7 @@ function login(unionId, userName, password) {
 				if(data.success) {
 					location.href = base + "/page/weixin/auth/myIndex.jsp";
 				} else {
-					var errorMsg = data.logInfo;
+					var errorMsg = data.msg;
 					showLoginErrorMsg(errorMsg, "#userName, #password");
 				}
 			}

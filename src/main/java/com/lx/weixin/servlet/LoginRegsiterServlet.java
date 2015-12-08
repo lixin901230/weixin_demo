@@ -137,8 +137,9 @@ public class LoginRegsiterServlet extends HttpServlet {
 		String errorMsg = "";
 		
 		String id = UUIDUtil.id();
-		//String unionId = request.getParameter("unionId");	//微信账号唯一标识，注册时将当前注册的账号与微信用户唯一标示UnionId进行绑定，便于自动登录
-		String unionId = (String) request.getSession().getAttribute(WeixinConst.SESSION_UNIONID);
+//		String unionId = request.getParameter("unionId");	//微信账号唯一标识，注册时将当前注册的账号与微信用户唯一标示UnionId进行绑定，便于自动登录
+		Object unionIdObj = request.getSession().getAttribute(WeixinConst.SESSION_UNIONID);
+		String unionId = unionIdObj != null ? unionIdObj.toString() : null;
 		String userName = request.getParameter("userName");
 		String password = request.getParameter("password");
 		String trueName = request.getParameter("trueName");
@@ -175,12 +176,13 @@ public class LoginRegsiterServlet extends HttpServlet {
 	 * 登录
 	 */
 	public void login(HttpServletRequest request, HttpServletResponse response) {
-		System.out.println(1112);
+		
+		logger.info(">>>>>>>>>>>>>>进入登录了");
 		boolean success = false;
 		String errorMsg = "";
 		
 		//微信账号唯一标识，注册时将当前注册的账号与微信用户唯一标示UnionId进行绑定，便于自动登录
-		String unionId = (String) request.getSession().getAttribute(WeixinConst.SESSION_UNIONID);
+		String unionId = request.getParameter("unionId");
 		String userName = request.getParameter("userName");
 		String password = request.getParameter("password");
 		

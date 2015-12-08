@@ -26,6 +26,7 @@ import com.lx.weixin.spring.bean.UserInfo;
 import com.lx.weixin.spring.util.ApplicationContextHelper;
 import com.lx.weixin.util.JsonUtil;
 import com.lx.weixin.util.LoadWeixinPropertiesConfig;
+import com.lx.weixin.util.ResultHandle;
 import com.lx.weixin.util.WeixinConst;
 
 /**
@@ -81,9 +82,14 @@ public class WeixinOAuthCallbackServlet extends HttpServlet {
 		
 		try {
 			
+			String path = request.getContextPath();
+			String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+			
 			String forwardPageName = wxOauthCallback(request);
-			String forwardUrl = "/page/weixin/open/"+ forwardPageName +".jsp";
-			request.getRequestDispatcher(forwardUrl).forward(request, response);
+			String forwardUrl = basePath + "page/weixin/open/"+ forwardPageName +".jsp";
+			
+			logger.info(">>>>>>>>>>>>>>微信授权网页成功，跳转到："+basePath);
+			response.sendRedirect(forwardUrl);
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -107,12 +113,13 @@ public class WeixinOAuthCallbackServlet extends HttpServlet {
 			    	
 			    	unionId = accessTokenJson.getString("unionid");
 			        String openId = accessTokenJson.getString("openid");
+
+			        unionId = "oyY15uJvI9eSh5jcr1wFIyM2NmHg";
+			        // openId = "oT0b-jqYdPi92LaKybuUptyfrGWQ";
 			        
 			        //将unionId存入session，方便应用中取用
 			        request.getSession().setAttribute(WeixinConst.SESSION_UNIONID, unionId);	//存入unionId到session中，方便页面取值
-			        
-			        //unionId = "oZ6H7t2tWAU5ipECOe5m44U9b3jU";
-			       // openId = "oT0b-jqYdPi92LaKybuUptyfrGWQ";
+			        System.out.println("========="+ request.getSession().getAttribute(WeixinConst.SESSION_UNIONID));
 			        
 			        String accessToken = accessTokenJson.getString("access_token");
 			        boolean isValid = checkOAuthAccessToken(accessToken, openId);
