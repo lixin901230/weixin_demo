@@ -114,7 +114,7 @@ public class WeixinOAuthCallbackServlet extends HttpServlet {
 			    	unionId = accessTokenJson.getString("unionid");
 			        String openId = accessTokenJson.getString("openid");
 
-			        unionId = "oyY15uJvI9eSh5jcr1wFIyM2NmHg";
+			        // unionId = "oyY15uJvI9eSh5jcr1wFIyM2NmHg";
 			        // openId = "oT0b-jqYdPi92LaKybuUptyfrGWQ";
 			        
 			        //将unionId存入session，方便应用中取用
