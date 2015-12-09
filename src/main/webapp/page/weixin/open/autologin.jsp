@@ -14,7 +14,6 @@
 		
 		//去用户中心登录
 		function toAutoLogin() {
-			alert("toAutoLogin");
 			if(unionId) {
 				$.ajax({
 					url: base + '/LoginRegsiterServlet?method=login',

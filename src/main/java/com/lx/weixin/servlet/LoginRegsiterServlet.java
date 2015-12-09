@@ -200,7 +200,7 @@ public class LoginRegsiterServlet extends HttpServlet {
 							logger.error("绑定mooc平台账号与微信账号唯一标识unionId失败，原因："+e);
 							errorMsg = "用户登录号绑定微信账号失败";
 						}
-					} else if(unionIdTemp.equals(unionId)) {
+					} else if(!unionIdTemp.equals(unionId)) {
 						user = null;
 						errorMsg = "该用户已绑定其它微信账号";
 					}
@@ -239,8 +239,8 @@ public class LoginRegsiterServlet extends HttpServlet {
 		//手动注销，清除用户绑定的unionId
 		userLoginRegsiterService.updateUserUnionId(user.getUserName(), null);
 
-		//移除session
-		request.getSession().removeAttribute(CURRENT_LOGIN_USER);
+		//销毁session
+		request.getSession().invalidate();
 		
 		Map<String, Object> resultMap = ResultHandle.getResultMap(true, "");
 		JsonUtil.writeJsonStr(response, JsonUtil.objToStr(resultMap));

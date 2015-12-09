@@ -122,7 +122,7 @@ function register() {
 		success: function(data){
 			if(data && data.success) {
 				var unionId = data.data.unionId;
-				login(null, userName, password);	//注册成功后，去用户中心自动登录
+				login(unionId, userName, password);	//注册成功后，去用户中心自动登录
 			}
 		},
 		error: function(){alrt("注册请求操作失败！");}
@@ -163,21 +163,28 @@ function loginSubmit() {
 	}
 	
 	password = MD5(password.replace(/\%/g, "%25").replace(/\+/g, "%2B").replace(/\&/g, "%26"));
-	login(null, userName, password);
+	login(unionId, userName, password);
 }
 
-// 去登录
+/**
+ * 去登录
+ * @param unionId	微信账号唯一标识，分两种情况：<br/>
+ * 				1）通过微信公众号的菜单进入该网站（我们自己的系统）：才会有该值，当通过用户名和密码登录成功后则将unionId与登录的用户进行绑定，便于下次在公众号中直接根据unionId自动登录进入我们的系统<br/>
+ * 				2）不通过微信公众号进入我们的系统，而是直接通过其他手机浏览器登录时，unionId为空，只有通过微信公众号访问我们的网站时才会有该值
+ * @param userName	用户名
+ * @param password	密码
+ */
 function login(unionId, userName, password) {
 	
 	var params = {};
-	/*if(!CommonUtil.isEmpty(unionId)) {
+	if(!CommonUtil.isEmpty(unionId)) {
 		params["unionId"] = unionId;
-	}*/
+	}
 	if(!CommonUtil.isEmpty(userName) && !CommonUtil.isEmpty(password)) {
 		params["userName"] = userName;
 		params["password"] = password;
 	}
-	alert(params);
+	
 	$.ajax({
 		url: base + '/LoginRegsiterServlet?method=login',
 		type: 'post',
