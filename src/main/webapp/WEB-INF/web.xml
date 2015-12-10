@@ -52,4 +52,12 @@
   	<servlet-name>LoginRegsiterServlet</servlet-name>
   	<url-pattern>/LoginRegsiterServlet</url-pattern>
   </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>LoginRegsiterServlet</servlet-name>
+  	<url-pattern>/LoginRegsiterServlet/*</url-pattern>
+  </servlet-mapping>
+  <!-- <servlet-mapping>
+  	<servlet-name>LoginRegsiterServlet</servlet-name>
+  	<url-pattern>/LoginRegsiterServlet_*</url-pattern>
+  </servlet-mapping> -->
 </web-app>

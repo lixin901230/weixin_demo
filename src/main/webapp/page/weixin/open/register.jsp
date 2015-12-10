@@ -30,7 +30,7 @@
 </head>
 
 <body class="bg_f9">
-	<div class="auto">
+	<div class="auto" id="register_page">
 	    
 		<!---------- main start ---------->
 	    <div>

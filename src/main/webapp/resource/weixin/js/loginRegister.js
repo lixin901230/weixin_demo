@@ -6,19 +6,19 @@ $(function(){
 		window.location.replace(base + "/page/weixin/open/register.jsp");
 	});
 	
-	// 去登录页面
-	$("a[name='btn_login']").on("click", function(){
-		window.location.replace(base + "/page/weixin/open/login.jsp");
-	});
-	
 	// 检查用户唯一性
-	$("#userName").on("blur", function(){
+	$("#register_page #userName").on("blur", function(){
 		checkUserNameIsExist();
 	});
 
 	// 注册
 	$("#register_btn").on("click", function(){
 		register();
+	});
+	
+	// 去登录页面
+	$("a[name='btn_login']").on("click", function(){
+		window.location.replace(base + "/page/weixin/open/login.jsp");
 	});
 	
 	// 登录
@@ -59,7 +59,7 @@ function checkUserNameIsExist() {
 		return false;
 	}
 	$.ajax({
-		url: base + '/LoginRegsiterServlet?method=checkUserNameIsExist',
+		url: base + '/LoginRegsiterServlet?method=checkUserNameIsExist.do',
 		type: 'post',
 		data: {"userName": userName},
 		dataType: 'json',

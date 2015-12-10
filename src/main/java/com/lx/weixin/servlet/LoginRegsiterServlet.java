@@ -1,14 +1,12 @@
 package com.lx.weixin.servlet;
 
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -17,6 +15,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.lx.weixin.service.IUserLoginRegsiterService;
+import com.lx.weixin.servlet.core.DispatchServletSupport;
 import com.lx.weixin.spring.bean.UserInfo;
 import com.lx.weixin.spring.util.ApplicationContextHelper;
 import com.lx.weixin.util.JsonUtil;
@@ -27,7 +26,7 @@ import com.lx.weixin.util.WeixinConst;
 /**
  * 用户注册、登录Servlet
  */
-public class LoginRegsiterServlet extends HttpServlet {
+public class LoginRegsiterServlet extends DispatchServletSupport {
 	private static final long serialVersionUID = 1L;
 	
 	public Logger logger = LoggerFactory.getLogger(getClass());
@@ -43,17 +42,6 @@ public class LoginRegsiterServlet extends HttpServlet {
 		if(userLoginRegsiterService == null) {
 			logger.error("初始化 IUserLoginRegsiterService bean 失败");
 		}
-	}
-    
-	@Override
-	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doPost(request, response);
-	}
-
-	@Override
-	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		dispatchMethod(request, response);
 	}
 	
 	/**
@@ -78,27 +66,13 @@ public class LoginRegsiterServlet extends HttpServlet {
 			}
 		}
 
-		/*try {
-			Method method = getClass().getDeclaredMethod(methodName, request.getClass(), response.getClass());
+		try {
+			Method method = getClass().getDeclaredMethod(methodName, HttpServletRequest.class, HttpServletResponse.class);
 			method.setAccessible(true);	//释放私有方法调用访问权限
-			method.invoke(getClass(), request, response);
-		} catch (NoSuchMethodException e) {
+			method.invoke(this, request, response);
+			
+		} catch (Exception e) {
 			e.printStackTrace();
-		} catch (IllegalArgumentException e) {
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			e.printStackTrace();
-		} catch (InvocationTargetException e) {
-			e.printStackTrace();
-		}*/
-		if("register".equals(methodName)) {	//注册
-			register(request, response);
-		} else if("login".equals(methodName)) {	//登录
-			login(request, response);
-		} else if("checkUserNameIsExist".equals(methodName)) {	//检测用户唯一性
-			checkUserNameIsExist(request, response);
-		} else if("loginOut".equals(methodName)) {	//检测用户唯一性
-			loginOut(request, response);
 		}
 	}
 	
