@@ -2,6 +2,8 @@ package com.lx.weixin.util;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -19,6 +21,12 @@ import net.sf.json.JSONObject;
 public class JsonUtil {
 	
 	private static Logger logger = LoggerFactory.getLogger(JsonUtil.class);
+	
+	public static Map<String, Object> getResultDataMap(Object obj) {
+		Map<String, Object> resultData = new HashMap<String, Object>();
+		resultData.put("data", obj);
+		return resultData;
+	}
 	
 	public static void writeJsonStr(HttpServletResponse response, String jsonStr) {
 		
@@ -70,5 +78,11 @@ public class JsonUtil {
 			e.printStackTrace();
 		}
 		return null;
+	}
+	
+	public static JSONObject objToJson(Object object) {
+		
+		JSONObject jsonObject = JSONObject.fromObject(object);
+		return jsonObject;
 	}
 }

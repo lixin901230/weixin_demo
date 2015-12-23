@@ -38,7 +38,7 @@ import com.google.zxing.common.BitMatrix;
 import com.lx.weixin.util.FileUtil;
 
 /**
- * 二维码打印
+ * 调用打印机打印二维码
  * @author lixin
  */
 public class PrintQrcode {
@@ -50,10 +50,10 @@ public class PrintQrcode {
 	public static void main(String[] args) {
 		String fileName = "qrcode.jpg";
 		String resRealPath = FileUtil.getResRealPath();
-		if(!resRealPath.endsWith("/")) {
-			resRealPath += "/";
+		if(!resRealPath.endsWith(File.separator)) {
+			resRealPath += File.separator;
 		}
-		String qrCodeFilePath = resRealPath + FileUtil.UPLOAD_PATH +"/" +fileName;
+		String qrCodeFilePath = resRealPath + FileUtil.UPLOAD_PATH + File.separator + fileName;
 		try {
 			File file = new File(qrCodeFilePath);
 			PrintQrcode printQrcode = new PrintQrcode();
