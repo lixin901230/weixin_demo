@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -37,7 +38,7 @@ public class QRCode {
 		String resRealPath = FileUtil.getResRealPath();
 		resRealPath = resRealPath.endsWith("/") ? resRealPath : resRealPath + "/"; 
 		
-		String fileName = "qr1.png";
+		String fileName = "qr_"+new Date().getTime()+".png";
 		String qrFilePath = resRealPath + FileUtil.UPLOAD_PATH + "/"+ fileName;
 		/*File file = new File(filePath);
 		if(!file.exists()) {

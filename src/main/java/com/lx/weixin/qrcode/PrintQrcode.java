@@ -96,14 +96,13 @@ public class PrintQrcode {
 	 * @param filePath
 	 * @return
 	 */
-	public Boolean printQRCode(String code,String filePath) {
+	public Boolean printQRCode(String code, String filePath) {
 		try {
 			String format = "png";
 			Map<EncodeHintType, Object> hints = new HashMap<EncodeHintType, Object>();
 			hints.put(EncodeHintType.CHARACTER_SET, "utf-8");
-			BitMatrix bitMatrix = new MultiFormatWriter().encode(code,
-					BarcodeFormat.QR_CODE, WIDTH, HEIGHT, hints);
-			 File outputFile = new File(filePath);
+			BitMatrix bitMatrix = new MultiFormatWriter().encode(code, BarcodeFormat.QR_CODE, WIDTH, HEIGHT, hints);
+			File outputFile = new File(filePath);
 			MatrixToImageWriter.writeToFile(bitMatrix, format, outputFile);
 			
 			print(outputFile);
