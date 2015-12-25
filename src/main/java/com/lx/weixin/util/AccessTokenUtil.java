@@ -56,11 +56,11 @@ public class AccessTokenUtil {
 				accessToken = new AccessToken(token, NumberUtil.strToInteger(expiresInStr));
 			}
 			
+			logger.info("\n>>>>>>微信公众号接口访问认证accessToken ["+accessToken.getToken()+"]\n");
 		} catch (Exception e) {
-			logger.error("获取access_token失败，原因："+e);
+			logger.error("\n>>>>>>获取access_token失败！\n");
 			e.printStackTrace();
 		}
-		System.out.println("\n\naccessToken="+accessToken.getToken()+"\n");
 		return accessToken;
 	}
 }

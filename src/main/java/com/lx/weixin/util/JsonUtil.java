@@ -2,15 +2,13 @@ package com.lx.weixin.util;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.HashMap;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
+import net.sf.json.JSONObject;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.json.JSONObject;
 
 /**
  * json工具类
@@ -21,12 +19,6 @@ import net.sf.json.JSONObject;
 public class JsonUtil {
 	
 	private static Logger logger = LoggerFactory.getLogger(JsonUtil.class);
-	
-	public static Map<String, Object> getResultDataMap(Object obj) {
-		Map<String, Object> resultData = new HashMap<String, Object>();
-		resultData.put("data", obj);
-		return resultData;
-	}
 	
 	public static void writeJsonStr(HttpServletResponse response, String jsonStr) {
 		
