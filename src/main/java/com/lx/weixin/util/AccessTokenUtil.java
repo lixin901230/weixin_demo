@@ -1,5 +1,6 @@
 package com.lx.weixin.util;
 
+import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
 

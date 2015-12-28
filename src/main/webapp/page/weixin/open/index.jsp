@@ -13,8 +13,11 @@
 	</style>
 </head>
 <body>
-	<div class="font_show">李鑫的微信网站首页（微信第三方网页授权认证成功）<div>
-	<a href="${ctx}/page/weixin/open/login.jsp" class="font_show">登录</a>
-	<a href="${ctx}/page/weixin/open/register.jsp" class="font_show">注册</a>
+	<div class="font_show">李鑫的微信网站首页（微信第三方网页授权认证成功）</div>
+	<div class="font_show">
+		<a href="${ctx}/page/weixin/open/login.jsp" class="font_show">登录</a>
+		<a href="${ctx}/page/weixin/open/register.jsp" class="font_show">注册</a><br/>
+		<a href="${ctx}/page/weixin/open/weixin_js_sdk.jsp" class="font_show">JS-SDK调试页面</a>
+	</div>	
 </body>
 </html>
