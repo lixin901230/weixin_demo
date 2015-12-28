@@ -1,6 +1,5 @@
 package com.lx.weixin.util;
 
-import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -15,7 +14,7 @@ import com.lx.weixin.bean.AccessToken;
 import com.lx.weixin.httpClient.HttpClientUtil;
 
 /**
- * 微信access_token获取工具类
+ * 微信接口访问凭证（access_token）获取工具类
  * 
  * @author lixin
  *
@@ -34,7 +33,15 @@ public class AccessTokenUtil {
 	}
 	
 	/**
-	 * 获取access_token
+	 * 获取access_token	接口访问凭证
+	 * @return
+	 */
+	public static String getToken() {
+		return getAccessToken().getToken();
+	}
+	
+	/**
+	 * 获取access_token 对象
 	 * @return
 	 */
 	public static AccessToken getAccessToken() {
