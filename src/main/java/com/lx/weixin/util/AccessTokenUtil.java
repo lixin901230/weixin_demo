@@ -37,6 +37,14 @@ public class AccessTokenUtil {
 	 * 获取access_token
 	 * @return
 	 */
+	public static String getToken() {
+		return getAccessToken().getToken();
+	}
+	
+	/**
+	 * 获取access_token 对象
+	 * @return
+	 */
 	public static AccessToken getAccessToken() {
 		
 		AccessToken accessToken = null;
