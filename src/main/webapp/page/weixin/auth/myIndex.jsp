@@ -16,6 +16,7 @@
 		用户绑定的微信账号唯一标识：${session_user.unionId}
 	</div>
 	
-	<div>退出登录：<a href="javascript:void(0);" id="login_out" style="font-size: 45px;">退出登录</a></div>
+	<div>退出登录：<a href="javascript:void(0);" id="login_out" style="font-size: 45px;">退出登录</a></div><br/>
+	<div align="center"><a href="${ctx}/page/weixin/open/weixin_js_sdk.jsp" style="font-size: 45px;">JS-SDK调试页面</a></div>
 </body>
 </html>
