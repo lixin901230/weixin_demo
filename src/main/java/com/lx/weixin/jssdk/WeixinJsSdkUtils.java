@@ -142,11 +142,11 @@ public class WeixinJsSdkUtils {
 	
 	private static String createNonceStr() {
         return UUID.randomUUID().toString();
-    }
+	}
  
-    private static String createTimestamp() {
+	private static String createTimestamp() {
         return Long.toString(System.currentTimeMillis() / 1000);
-    }
+	}
      
     /**
      * 获取当前系统时间 用来判断access_token是否过期
