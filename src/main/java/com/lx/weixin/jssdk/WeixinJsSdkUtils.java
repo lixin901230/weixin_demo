@@ -144,7 +144,7 @@ public class WeixinJsSdkUtils {
         return UUID.randomUUID().toString();
     }
  
-    private static String createTimestamp() {
+	private static String createTimestamp() {
         return Long.toString(System.currentTimeMillis() / 1000);
     }
      
