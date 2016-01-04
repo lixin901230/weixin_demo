@@ -31,6 +31,7 @@ public class WeixinJsSdkUtils {
 	private static Logger logger = LoggerFactory.getLogger(WeixinJsSdkUtils.class);
 	
 	public static void main(String[] args) {
+		System.out.println("=====");
 		String jsApiTicket = getJsApiTicket();
 		//System.out.println("\n"+jsApiTicket);
 		
