@@ -57,7 +57,7 @@ public class WeixinValidateCallbackServlet extends HttpServlet {
         // 2、SHA1加密
         String digest = new SHA1().getDigestOfString(bigStr.getBytes()).toLowerCase();
 
-        // 3、确认请求来至微信
+        // 3、确认请求来至微信返回加密串给微信平台进行确认
         if (digest.equals(signature)) {
         	System.out.println("微信平台认证通过："+echostr);
             response.getWriter().print(echostr);
