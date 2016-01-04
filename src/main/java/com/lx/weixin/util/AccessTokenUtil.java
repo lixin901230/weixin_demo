@@ -29,7 +29,7 @@ public class AccessTokenUtil {
 	
 	public static void main(String[] args) {
 		AccessToken accessToken = getAccessToken();
-		logger.info(">>>>>>accessToken："+accessToken.getToken());
+		System.out.println(accessToken);
 	}
 	
 	/**
@@ -47,7 +47,7 @@ public class AccessTokenUtil {
 	public static AccessToken getAccessToken() {
 		
 		AccessToken accessToken = null;
-		String url = "https://api.weixin.qq.com/cgi-bin/token";
+		String url = WeixinURLUtil.ACCESS_TOKEN_URL.substring(0, WeixinURLUtil.ACCESS_TOKEN_URL.indexOf("?"));
 		Map<String, String> parameter = new HashMap<String, String>();
 		parameter.put("grant_type", GRANT_TYPE);
 		parameter.put("appid", APPID);
