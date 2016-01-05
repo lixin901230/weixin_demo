@@ -50,7 +50,7 @@
   </servlet>
   <servlet-mapping>
   	<servlet-name>WeixinJsSdkValidateServlet</servlet-name>
-  	<url-pattern>/jssdk/wxJsSdkValidateServlet.do</url-pattern>
+  	<url-pattern>/jssdk/wxJsSdkValidateServlet</url-pattern>
   </servlet-mapping>
 
   <servlet>

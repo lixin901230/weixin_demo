@@ -68,15 +68,16 @@ public class WeixinJsSdkValidateServlet extends DispatchServletSupport {
 	 */
 	public void getWxJsSdkConfig(HttpServletRequest request, HttpServletResponse response) {
 		
+		String targetUrl = request.getParameter("targetUrl");	//页面地址url
 		String appId = request.getParameter("appId");	//	检测是否传入了appId,未传在使用系统中配置的公众号的appId
 		if(StringUtils.isEmpty(appId)) {
 			appId = CommonConst.APPID;
 		}
 		
-		String url = getRequestUrl(request);	//获取请求地址
+		//String url = getRequestUrl(request);	//获取请求地址
 		String jsApiTicket = getJsApiTicket();
 		
-		Map<String, String> params = wxJsSdkSignature(appId, jsApiTicket, url);
+		Map<String, String> params = wxJsSdkSignature(appId, jsApiTicket, targetUrl);
 		
 		JSONObject jsonObject = JsonUtil.objToJson(ResultHandle.getResultDataMap(params));
 		String jsonStr = jsonObject.toString();
