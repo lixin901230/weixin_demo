@@ -17,6 +17,10 @@ public class ResultHandle {
 		System.out.println(resultMap);
 	}
 	
+	/**
+	 * @param obj
+	 * @return	{"data", obj}
+	 */
 	public static Map<String, Object> getResultDataMap(Object obj) {
 		Map<String, Object> resultData = new HashMap<String, Object>();
 		resultData.put("data", obj);

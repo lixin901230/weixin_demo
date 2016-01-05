@@ -49,7 +49,7 @@ public class LoginRegsiterServlet extends DispatchServletSupport {
 	 * @param request
 	 * @param response
 	 */
-	public void dispatchMethod(HttpServletRequest request, HttpServletResponse response) {
+	/*public void dispatchMethod(HttpServletRequest request, HttpServletResponse response) {
 		String methodName = request.getParameter("method");
 		if(StringUtils.isEmpty(methodName)) {	
 			String requestURI = request.getRequestURI();
@@ -74,7 +74,7 @@ public class LoginRegsiterServlet extends DispatchServletSupport {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	}
+	}*/
 	
 	/**
 	 * 检测注册的用户名是否已存在

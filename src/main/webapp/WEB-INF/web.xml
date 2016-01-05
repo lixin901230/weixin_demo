@@ -43,6 +43,15 @@
   	<servlet-name>WeixinOAuthCallbackServlet</servlet-name>
   	<url-pattern>/wxOAuthCallback.do</url-pattern>
   </servlet-mapping>
+  
+  <servlet>
+  	<servlet-name>WeixinJsSdkValidateServlet</servlet-name>
+  	<servlet-class>com.lx.weixin.servlet.WeixinJsSdkValidateServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>WeixinJsSdkValidateServlet</servlet-name>
+  	<url-pattern>/jssdk/wxJsSdkValidateServlet.do</url-pattern>
+  </servlet-mapping>
 
   <servlet>
   	<servlet-name>LoginRegsiterServlet</servlet-name>

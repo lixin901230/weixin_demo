@@ -45,6 +45,24 @@ public abstract class DispatchServletSupport extends HttpServlet {
 			e.printStackTrace();
 		}
 	}
+	
+	/**
+	 * 获取请求地址
+	 * @param request
+	 * @return	eg：
+	 */
+	public String getRequestUrl(HttpServletRequest request) {
+		
+		String url = request.getRequestURL().toString();//eg. http://localhost:8080/weixin/LoginRegsiterServlet
+		String queryUrl = request.getQueryString();	//eg. method=methodName.do&userName=zhangsan
+		
+		String completeUrl = url;
+		if(StringUtils.isNotEmpty(queryUrl)) {
+			completeUrl = completeUrl + "?" + queryUrl;
+		}
+		logger.info("["+getClass().getName()+"]：开始解析请求方法名，请求地址："+ completeUrl);
+		return completeUrl;
+	}
 
 	/**
 	 * 执行方法
@@ -57,10 +75,11 @@ public abstract class DispatchServletSupport extends HttpServlet {
 		String methodName = methodNameHandle(request);
 		logger.info("["+getClass().getName()+"]：开始反射执行方法["+methodName+"]...");
 		
-		Method method = getClass().getDeclaredMethod(methodName, HttpServletRequest.class, HttpServletResponse.class);
 		if(StringUtils.isEmpty(methodName)) {
 			throw new NoSuchMethodException("["+methodName+"]方法不存在——————>["+getClass().getName()+"]");
 		}
+		
+		Method method = getClass().getDeclaredMethod(methodName, HttpServletRequest.class, HttpServletResponse.class);
 		if(method != null) {
 			method.setAccessible(true);	//释放私有方法调用访问权限
 			method.invoke(this, request, response);

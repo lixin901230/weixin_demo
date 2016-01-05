@@ -1,4 +1,4 @@
-package com.lx.weixin.jssdk;
+package com.lx.weixin.servlet;
 
 import java.security.MessageDigest;
 import java.text.SimpleDateFormat;
@@ -8,41 +8,81 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import net.sf.json.JSONObject;
 
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.methods.GetMethod;
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.lx.weixin.servlet.core.DispatchServletSupport;
 import com.lx.weixin.util.AccessTokenUtil;
 import com.lx.weixin.util.CommonConst;
+import com.lx.weixin.util.CommonUtils;
 import com.lx.weixin.util.JsonUtil;
+import com.lx.weixin.util.ResultHandle;
 
 /**
  * 微信JS-SDK使用接入与签名<br/>
  * 1）、获取微信jsapi使用票据（ jsapi_ticket)<br/>
  * 2）、获取JS-SDK使用权限签名（使用SHA1算法）
- * @author lx
- *
+ * 
+ * @author lixin
+ * 
  */
-public class WeixinJsSdkUtils {
+public class WeixinJsSdkValidateServlet extends DispatchServletSupport {
 	
-	private static Logger logger = LoggerFactory.getLogger(WeixinJsSdkUtils.class);
+	private static final long serialVersionUID = 3832691448389040033L;
+	private static Logger logger = LoggerFactory.getLogger(WeixinJsSdkValidateServlet.class);
 	
+	/**
+	 * 测试
+	 * @param args
+	 */
 	public static void main(String[] args) {
-		System.out.println("hello");
-		System.out.println("=====");
-		String jsApiTicket = getJsApiTicket();
-		//System.out.println("\n"+jsApiTicket);
 		
-		//JSONObject jsApiTicketJsonObj = getJsApiTicketJsonObj();
+		JSONObject jsApiTicketJsonObj = getJsApiTicketJsonObj();
 		//String result = (jsApiTicketJsonObj != null) ? jsApiTicketJsonObj.toString() : "获取japi_ticket失败！";
 		//System.out.println(result);
 		
-		String url = "http://www.lixinsj.com.cn/weixin/page/weixin/open/weixin_js_sdk.jsp";
-		String jsSdkSignature = wxJsSdkSignature(jsApiTicket, url);
-		//System.out.println("\n"+jsSdkSignature);
+		if(jsApiTicketJsonObj != null) {
+			
+			String jsApiTicket = jsApiTicketJsonObj.getString("ticket");
+			logger.info("\n>>>>>>jsApiTicket："+jsApiTicket+"\n");
+			
+			String url = "http://www.lixinsj.com.cn/weixin/page/weixin/open/weixin_js_sdk.jsp";
+			Map<String, String> params = wxJsSdkSignature(CommonConst.APPID, jsApiTicket, url);
+			logger.info("\n>>>>>>jsSdkSignature："+params.get("signature")+"\n");
+		}
+	}
+	
+	/**
+	 * 获取微信js-sdk调试配置
+	 * @param jsApiTicket
+	 * @param url
+	 * @return
+	 */
+	public void getWxJsSdkConfig(HttpServletRequest request, HttpServletResponse response) {
+		
+		String appId = request.getParameter("appId");	//	检测是否传入了appId,未传在使用系统中配置的公众号的appId
+		if(StringUtils.isEmpty(appId)) {
+			appId = CommonConst.APPID;
+		}
+		
+		String url = getRequestUrl(request);	//获取请求地址
+		String jsApiTicket = getJsApiTicket();
+		
+		Map<String, String> params = wxJsSdkSignature(appId, jsApiTicket, url);
+		
+		JSONObject jsonObject = JsonUtil.objToJson(ResultHandle.getResultDataMap(params));
+		String jsonStr = jsonObject.toString();
+		logger.info("\n>>>>>>微信JS-SDK接入配置："+jsonStr+"\n");
+		
+		JsonUtil.writeJsonStr(response, jsonStr);
 	}
 	
 	/**
@@ -89,29 +129,30 @@ public class WeixinJsSdkUtils {
 	
 	/**
 	 * 微信JS-SDK签名
-	 * @param url	当前网页的URL，不包含#及其后面部分
+	 * @param appId
+	 * 			微信公众号appId
+	 * 
+	 * @param jsApiTicket
+	 * 			jsapi使用票据
+	 * 
+	 * @param url	
+	 * 			当前网页的URL，不包含#及其后面部分
+	 * 
 	 * @return
 	 */
-	public static String wxJsSdkSignature(String jsApiTicket, String url) {
+	public static Map<String, String> wxJsSdkSignature(String appId, String jsApiTicket, String url) {
 		
-		//String jsApiTicket = getJsApiTicket();
-		Map<String, String> params = sign(jsApiTicket, url);
-		params.put("appid", CommonConst.APPID);
-		JSONObject jsonObject = JsonUtil.objToJson(params);
-		String jsonStr = jsonObject.toString();
-		logger.info("\n>>>>>>微信JS-SDK签名："+jsonStr+"\n");
-		return jsonStr;
-	}
-	
-	public static Map<String, String> sign(String jsapi_ticket, String url) {
+		if(url.contains("#")) {	//签名算法要求：当前网页的URL，不包含#及其后面部分
+			url = url.substring(0, url.indexOf("#"));
+		}
 		
-        Map<String, String> ret = new HashMap<String, String>();
+        Map<String, String> result = new HashMap<String, String>();
         String noncestr = createNonceStr();
         String timestamp = createTimestamp();
         String signature = "";
  
         //注意这里参数名必须全部小写，且必须有序
-        String str = "jsapi_ticket=" + jsapi_ticket +
+        String str = "jsapi_ticket=" + jsApiTicket +
                   "&noncestr=" + noncestr +
                   "&timestamp=" + timestamp +
                   "&url=" + url;
@@ -123,13 +164,15 @@ public class WeixinJsSdkUtils {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        ret.put("url", url);
-        ret.put("jsapi_ticket", jsapi_ticket);
-        ret.put("noncestr", noncestr);
-        ret.put("timestamp", timestamp);
-        ret.put("signature", signature);
+        
+        result.put("appid", appId);
+        result.put("url", url);
+        result.put("jsapi_ticket", jsApiTicket);
+        result.put("noncestr", noncestr);
+        result.put("timestamp", timestamp);
+        result.put("signature", signature);
  
-        return ret;
+        return result;
     }
 	
 	private static String byteToHex(final byte[] hash) {
