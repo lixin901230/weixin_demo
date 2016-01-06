@@ -13,7 +13,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import net.sf.json.JSONObject;
 
-import org.apache.commons.collections.MapUtils;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.commons.lang.StringUtils;
@@ -125,7 +124,7 @@ public class WeixinJsSdkValidateServlet extends DispatchServletSupport {
 	 */
 	public static JSONObject getJsApiTicketJsonObj() {
 		
-		String accessToken = AccessTokenUtil.getAccessToken().getToken();	//获取接口访问凭证
+		String accessToken = AccessTokenUtil.getToken();	//获取接口访问凭证
 		String url = "https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token="+accessToken+"&type=jsapi";
 		HttpClient httpClient = new HttpClient();
 		GetMethod method = new GetMethod(url);

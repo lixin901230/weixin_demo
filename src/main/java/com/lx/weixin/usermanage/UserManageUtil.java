@@ -41,8 +41,7 @@ public class UserManageUtil {
 		
 		String nextOpenId = "";
 		
-		AccessToken accessToken = AccessTokenUtil.getAccessToken();
-		String accessTokenStr = accessToken.getToken();
+		String accessTokenStr = AccessTokenUtil.getToken();
 		
 		String url = WeixinURLUtil.GET_USER_LIST_URL.replace("/ACCESS_TOKEN/", accessTokenStr).replace("/NEXT_OPENID/", nextOpenId);
 //		url = "https://api.weixin.qq.com/cgi-bin/user/get?access_token=ACCESS_TOKEN&next_openid=NEXT_OPENID";

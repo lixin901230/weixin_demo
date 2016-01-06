@@ -7,6 +7,7 @@ import net.sf.json.JSONObject;
 
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.methods.PostMethod;
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -44,12 +45,11 @@ public class MenuButtonUtil {
 		
 		try {
 			// 1、获取接口调用access_token
-			AccessToken accessToken = AccessTokenUtil.getAccessToken();
-			if(accessToken == null) {
+			String token = AccessTokenUtil.getToken();
+			if(StringUtils.isEmpty(token)) {
 				logger.error("菜单未创建，原因：access_token获取失败！");
 				throw new Exception("菜单未创建，原因：access_token获取失败！");
 			}
-			String token = accessToken.getToken();
 			
 			// 2、组装菜单对象
 			Menu menu = initMenu();

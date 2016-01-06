@@ -66,8 +66,7 @@ public class QRCodeUtil {
 		String msg = "获取二维码成功！";
 		try {
 			// 1、获取微信接口调用认证token
-			AccessToken token = AccessTokenUtil.getAccessToken();
-			String accessToken = token.getToken();
+			String accessToken = AccessTokenUtil.getToken();
 			
 			// 2、获取微信二维码ticket，用于去微信平台换取二维码图片
 			JSONObject jsonObject = createQRCodeTicket(accessToken);
