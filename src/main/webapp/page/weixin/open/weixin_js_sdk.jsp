@@ -58,37 +58,35 @@
 					'openCard'];
 		
 		//js-sdk接入配置
-		var appId = "wx70b0d2dbde434838";
+		//var appId = "wx70b0d2dbde434838";
 		var jsSdkConfig = {
 		    debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
-		   	appId: appId, // 必填，公众号的唯一标识
-		    timestamp: 1451495508, // 必填，生成签名的时间戳
-		    nonceStr: 'fd1696df-1b18-4b2b-a94c-e7d2328738fa', // 必填，生成签名的随机串
-		    signature: '92f3d8fcfbd853b47e2120a0da606457effcf2d2',// 必填，签名，见附录1
+		   	appId: null, // 必填，公众号的唯一标识
+		    timestamp: null, // 必填，生成签名的时间戳
+		    nonceStr: null, // 必填，生成签名的随机串
+		    signature: null,// 必填，签名，见附录1
 		    jsApiList: jsApiArr // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
 		};
 		
 		//获取微信js-sdk接入权限配置
 		function getWxJsSdkConfig() {
-			var targetUrl = window.location.href;
+			var targetUrl = window.location.href;	//eg：http://www.lixinsj.com.cn/weixin/page/weixin/open/weixin_js_sdk.jsp
 			$.ajax({
 				url: base +'/jssdk/wxJsSdkValidateServlet?method=getWxJsSdkConfig',
 				type: 'GET',
-				dataType: 'json',
 				data: 'targetUrl='+targetUrl,	//不传则后台通过读取weixin.properties配置文件来获取appId
+				dataType: 'json',
 				async: false,
 				cache: false,
 				success: function(data){
 					if(data && data.data) {
+						
 						var config = data.data;
-						
 						//更新js-sdk接入配置
-						jsSdkConfig["appId"] = config.appid;
+						jsSdkConfig["appId"] = config.appId;
 						jsSdkConfig["timestamp"] = config.timestamp;
-						jsSdkConfig["nonceStr"] = config.noncestr;
+						jsSdkConfig["nonceStr"] = config.nonceStr;
 						jsSdkConfig["signature"] = config.signature;
-						
-						console.info(jsSdkConfig)
 					}
 				},
 				error: function() {
@@ -108,11 +106,9 @@
 			wx.checkJsApi({
 			    jsApiList: jsApiArr, // 需要检测的JS接口列表，所有JS接口列表见附录2,
 			    success: function(res) {
-			        // 以键值对的形式返回，可用的api值true，不可用为false
-			        // 如：{"checkResult":{"chooseImage":true},"errMsg":"checkJsApi:ok"}
+			        // 以键值对的形式返回，可用的api值true，不可用为false；如：{"checkResult":{"chooseImage":true},"errMsg":"checkJsApi:ok"}
 			        console.info(">>>>>>wx.checkJsApi："+res);
-					
-			        
+								        
 			        
 			        //######################	js-sdk	调试		################################
 			        
@@ -120,80 +116,80 @@
 					
 					//分享接口：获取“分享到朋友圈”按钮点击状态及自定义分享内容接口
 					wx.onMenuShareTimeline({
-					    title: '分享到朋友圈测试', // 分享标题
+						title: '分享到朋友圈测试', // 分享标题
 					    link: 'http://www.lixinsj.com.cn/weixin/page/weixin/open/weixin_js_sdk.jsp', // 分享链接
 					    imgUrl: 'http://www.lixinsj.com.cn/weixin/incoming/qrcode.jpg', // 分享图标
 					    success: function () { 
 					        // 用户确认分享后执行的回调函数
-					        alert("分享到朋友圈测试成功！")
+					        alert("分享到朋友圈测试成功！");
 					    },
 					    cancel: function () { 
 					        // 用户取消分享后执行的回调函数
-					        alert("取消分享到朋友圈测试成功！")
+					        alert("取消分享到朋友圈测试成功！");
 					    }
 					});
 			
 					//分享接口：获取“分享给朋友”按钮点击状态及自定义分享内容接口
 					wx.onMenuShareQQ({
-					    title: '分享给朋友', // 分享标题
-					    desc: '分享给朋友', // 分享描述
+						title: '分享给朋友', // 分享标题
+					    desc: '微信公众号开发js-sdk测试——分享给朋友', // 分享描述
 					    link: 'http://www.lixinsj.com.cn/weixin/page/weixin/open/weixin_js_sdk.jsp', // 分享链接
 					    imgUrl: 'http://www.lixinsj.com.cn/weixin/incoming/qrcode.jpg', // 分享图标
 					    success: function () { 
 					       // 用户确认分享后执行的回调函数
-					       alert("分享给朋友测试成功！")
+					       alert("分享给朋友测试成功！");
 					    },
 					    cancel: function () { 
 					       // 用户取消分享后执行的回调函数
-					        alert("取消分享给朋友测试成功！")
+					        alert("取消分享给朋友测试成功！");
 					    }
 					});
 					
 					//分享接口：获取“分享到QQ”按钮点击状态及自定义分享内容接口
 					wx.onMenuShareQQ({
 						title: '分享到QQ', // 分享标题
-					    desc: '分享到QQ', // 分享描述
+					    desc: '微信公众号开发js-sdk测试——分享到QQ', // 分享描述
 					    link: 'http://www.lixinsj.com.cn/weixin/page/weixin/open/weixin_js_sdk.jsp', // 分享链接
 					    imgUrl: 'http://www.lixinsj.com.cn/weixin/incoming/qrcode.jpg', // 分享图标
 					    success: function () { 
 					       // 用户确认分享后执行的回调函数
-					       alert("分享到QQ测试成功！")
+					       alert("分享到QQ测试成功！");
 					    },
 					    cancel: function () { 
 					       // 用户取消分享后执行的回调函数
-					       alert("取消分享到QQ测试成功！")
+					       alert("取消分享到QQ测试成功！");
 					    }
 					});
 					
 					//分享接口：获取“分享到腾讯微博”按钮点击状态及自定义分享内容接口
 					wx.onMenuShareWeibo({
-						title: '分享到QQ', // 分享标题
-					    desc: '分享到QQ', // 分享描述
+						title: '分享到微博', // 分享标题
+					    desc: '微信公众号开发js-sdk测试——分享到微博', // 分享描述
 					    link: 'http://www.lixinsj.com.cn/weixin/page/weixin/open/weixin_js_sdk.jsp', // 分享链接
 					    imgUrl: 'http://www.lixinsj.com.cn/weixin/incoming/qrcode.jpg', // 分享图标
 					    success: function () { 
 					       // 用户确认分享后执行的回调函数
-					       alert("分享到腾讯微博测试成功！")
+					       alert("分享到腾讯微博测试成功！");
 					    },
 					    cancel: function () { 
 					        // 用户取消分享后执行的回调函数
-					        alert("取消分享到腾讯微博测试成功！")
+					        alert("取消分享到腾讯微博测试成功！");
 					    }
 					});
 					
 					//分享接口：获取“分享到QQ空间”按钮点击状态及自定义分享内容接口
 					wx.onMenuShareQZone({
-						title: '分享到QQ', // 分享标题
-					    desc: '分享到QQ', // 分享描述
+						title: '分享到QQ空间', // 分享标题
+					    desc: '微信公众号开发js-sdk测试——分享到QQ空间', // 分享描述
 					    link: 'http://www.lixinsj.com.cn/weixin/page/weixin/open/weixin_js_sdk.jsp', // 分享链接
 					    imgUrl: 'http://www.lixinsj.com.cn/weixin/incoming/qrcode.jpg', // 分享图标
-					    success: function () { 
+					    success: function () {
 					       // 用户确认分享后执行的回调函数
-					       alert("分享到QQ空间测试成功！")
+					       alert("分享到QQ空间测试成功！");
 					    },
 					    cancel: function () { 
 					        // 用户取消分享后执行的回调函数
-					        alert("取消分享到QQ空间测试成功！")
+					        alert("取消分享到QQ空间测试成功！");
 					    }
 					});
 					
@@ -262,7 +258,6 @@
 					//发起一个微信支付请求
 			    }
 			});
-			
 			
 		});
 	    
