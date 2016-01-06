@@ -13,16 +13,17 @@ import javax.servlet.http.HttpServletResponse;
 
 import net.sf.json.JSONObject;
 
+import org.apache.commons.collections.MapUtils;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.lx.weixin.cache.CacheUtils;
 import com.lx.weixin.servlet.core.DispatchServletSupport;
 import com.lx.weixin.util.AccessTokenUtil;
 import com.lx.weixin.util.CommonConst;
-import com.lx.weixin.util.CommonUtils;
 import com.lx.weixin.util.JsonUtil;
 import com.lx.weixin.util.ResultHandle;
 
@@ -38,6 +39,9 @@ public class WeixinJsSdkValidateServlet extends DispatchServletSupport {
 	
 	private static final long serialVersionUID = 3832691448389040033L;
 	private static Logger logger = LoggerFactory.getLogger(WeixinJsSdkValidateServlet.class);
+	
+	/** 微信jssdk接入配置缓存key */
+	private static final String WX_JS_CONF_CACHE_KEY = "weixin_@_js_sdk_config";
 	
 	/**
 	 * 测试
@@ -66,20 +70,35 @@ public class WeixinJsSdkValidateServlet extends DispatchServletSupport {
 	 * @param url
 	 * @return
 	 */
+	@SuppressWarnings("unchecked")
 	public void getWxJsSdkConfig(HttpServletRequest request, HttpServletResponse response) {
 		
-		String targetUrl = request.getParameter("targetUrl");	//页面地址url
-		String appId = request.getParameter("appId");	//	检测是否传入了appId,未传在使用系统中配置的公众号的appId
-		if(StringUtils.isEmpty(appId)) {
-			appId = CommonConst.APPID;
+		Map<String, String> jsConfigMap = new HashMap<String, String>();
+		
+		//从缓存中获取配置，存在则使用缓存的配置，否则重新获取
+		Object object = CacheUtils.get(WX_JS_CONF_CACHE_KEY);
+		if(object != null) {
+			
+			jsConfigMap = (Map<String, String>) object;
+			logger.info("\n>>>>>>获取缓存的微信js-sdk接入配置成功！\n");
+		} else {
+			
+			logger.info("\n>>>>>>微信js-sdk接入配置缓存失效，开始重新获取js-sdk接入配置...\n");
+			
+			String targetUrl = request.getParameter("targetUrl");	//页面地址url
+			String appId = request.getParameter("appId");	//	检测是否传入了appId,未传在使用系统中配置的公众号的appId
+			if(StringUtils.isEmpty(appId)) {
+				appId = CommonConst.APPID;
+			}
+			
+			//String url = getRequestUrl(request);	//获取请求地址
+			String jsApiTicket = getJsApiTicket();
+			
+			jsConfigMap = wxJsSdkSignature(appId, jsApiTicket, targetUrl);
+			CacheUtils.put(WX_JS_CONF_CACHE_KEY, jsConfigMap);
 		}
 		
-		//String url = getRequestUrl(request);	//获取请求地址
-		String jsApiTicket = getJsApiTicket();
-		
-		Map<String, String> params = wxJsSdkSignature(appId, jsApiTicket, targetUrl);
-		
-		JSONObject jsonObject = JsonUtil.objToJson(ResultHandle.getResultDataMap(params));
+		JSONObject jsonObject = JsonUtil.objToJson(ResultHandle.getResultDataMap(jsConfigMap));
 		String jsonStr = jsonObject.toString();
 		logger.info("\n>>>>>>微信JS-SDK接入配置："+jsonStr+"\n");
 		
@@ -166,10 +185,10 @@ public class WeixinJsSdkValidateServlet extends DispatchServletSupport {
             e.printStackTrace();
         }
         
-        result.put("appid", appId);
+        result.put("appId", appId);
         result.put("url", url);
-        result.put("jsapi_ticket", jsApiTicket);
-        result.put("noncestr", noncestr);
+        result.put("jsApiTicket", jsApiTicket);
+        result.put("nonceStr", noncestr);
         result.put("timestamp", timestamp);
         result.put("signature", signature);
  
@@ -186,10 +205,18 @@ public class WeixinJsSdkValidateServlet extends DispatchServletSupport {
         return result;
     }
 	
+	/**
+	 * 创建随机字符串
+	 * @return
+	 */
 	private static String createNonceStr() {
         return UUID.randomUUID().toString();
 	}
  
+	/**
+	 * 创建时间戳
+	 * @return
+	 */
 	private static String createTimestamp() {
         return Long.toString(System.currentTimeMillis() / 1000);
 	}
@@ -203,4 +230,5 @@ public class WeixinJsSdkValidateServlet extends DispatchServletSupport {
         SimpleDateFormat sdf =new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         return sdf.format(dt);
 	}
+    
 }
