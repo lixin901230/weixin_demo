@@ -8,7 +8,7 @@ import java.util.TimerTask;
  * 缓存有效期 
  * @author lixin
  */
-public class CacheTimer {
+public class CacheHelper {
 	
 	public static void main(String[] args) {
 		
