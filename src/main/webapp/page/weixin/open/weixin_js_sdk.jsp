@@ -29,47 +29,65 @@
 	   	<div class="c">
 	   		
 	    	<div class="cell bgc desc">图像接口</div>
-	    	<div class="cell cell_l"><input id="chooseImage" type="button" value="选择图片" class="btn" /></div>
-	    	<div class="cell cell_r"><input id="chooseImage" type="button" value="选择图片" class="btn" /></div>
-	    	<div class="cell cell_l"><input id="chooseImage" type="button" value="选择图片" class="btn" /></div>
-	    	<div class="cell cell_r"><input id="chooseImage" type="button" value="选择图片" class="btn" /></div>
+	    	<div class="cell cell_l"><input id="chooseImage" type="button" value="拍照或从手机相册中选图" class="btn" /></div>
+	    	<div class="cell cell_r"><input id="chooseImage" type="button" value="预览图片接口" class="btn" /></div>
+	    	<div class="cell cell_l"><input id="chooseImage" type="button" value="上传图片接口" class="btn" /></div>
+	    	<div class="cell cell_r"><input id="chooseImage" type="button" value="下载图片接口" class="btn" /></div>
 	    	
 	    	<div class="cell bgc desc">音频接口</div>
-	    	<div class="cell cell_l"><input id="chooseImage" type="button" value="选择图片" class="btn" /></div>
-	    	<div class="cell cell_r"><input id="chooseImage" type="button" value="选择图片" class="btn" /></div>
+	    	<div class="cell cell_l"><input id="startRecord" type="button" value="开始录音接口" class="btn" /></div>
+	    	<div class="cell cell_r"><input id="stopRecord" type="button" value="停止录音接口" class="btn" /></div>
+	    	<div class="cell cell_l"><input id="startRecord" type="button" value="监听录音自动停止接口" class="btn" /></div>
+	    	<div class="cell cell_r"><input id="stopRecord" type="button" value="播放语音接口" class="btn" /></div>
+	    	<div class="cell cell_l"><input id="startRecord" type="button" value="暂停播放接口" class="btn" /></div>
+	    	<div class="cell cell_r"><input id="stopRecord" type="button" value="停止播放接口" class="btn" /></div>
+	    	
+	    	<div class="cell cell_l"><input id="startRecord" type="button" value="监听语音播放完毕接口" class="btn" /></div>
+	    	<div class="cell cell_r"><input id="stopRecord" type="button" value="上传语音接口" class="btn" /></div>
+	    	<div class="cell cell_l"><input id="startRecord" type="button" value="下载语音接口" class="btn" /></div>
+	    	<div class="cell cell_r"></div>
 			
 	    	<div class="cell bgc desc">智能接口</div>
-	    	<div class="cell cell_l"><input id="chooseImage" type="button" value="选择图片" class="btn" /></div>
-	    	<div class="cell cell_r"><input id="chooseImage" type="button" value="选择图片" class="btn" /></div>
+	    	<div class="cell cell_l"><input id="chooseImage" type="button" value="识别音频并返回识别结果" class="btn" /></div>
+	    	<div class="cell cell_r"></div>
 	    	
 	    	<div class="cell bgc desc">设备信息</div>
-	    	<div class="cell cell_l"><input id="chooseImage" type="button" value="选择图片" class="btn" /></div>
-	    	<div class="cell cell_r"><input id="chooseImage" type="button" value="选择图片" class="btn" /></div>
+	    	<div class="cell cell_l"><input id="chooseImage" type="button" value="获取网络状态接口" class="btn" /></div>
+	    	<div class="cell cell_r"></div>
 	   		
 	    	<div class="cell bgc desc">地理位置</div>
-	    	<div class="cell cell_l"><input id="chooseImage" type="button" value="选择图片" class="btn" /></div>
-	    	<div class="cell cell_r"><input id="chooseImage" type="button" value="选择图片" class="btn" /></div>
+	    	<div class="cell cell_l"><input id="chooseImage" type="button" value="使用微信内置地图查看位置" class="btn" /></div>
+	    	<div class="cell cell_r"><input id="chooseImage" type="button" value="获取地理位置" class="btn" /></div>
 	   		
 	    	<div class="cell bgc desc">摇一摇周边</div>
-	    	<div class="cell cell_l"><input id="chooseImage" type="button" value="选择图片" class="btn" /></div>
-	    	<div class="cell cell_r"><input id="chooseImage" type="button" value="选择图片" class="btn" /></div>
+	    	<div class="cell"><input id="chooseImage" type="button" value="开启查找周边ibeacon设备" class="btn" /></div>
+	    	<div class="cell"><input id="chooseImage" type="button" value="关闭查找周边ibeacon设备" class="btn" /></div>
+	    	<div class="cell"><input id="chooseImage" type="button" value="监听周边ibeacon设备接口" class="btn" /></div>
 	   		
 	    	<div class="cell bgc desc">界面操作</div>
-	    	<div class="cell cell_l"><input id="chooseImage" type="button" value="选择图片" class="btn" /></div>
-	    	<div class="cell cell_r"><input id="chooseImage" type="button" value="选择图片" class="btn" /></div>
+	    	<div class="cell cell_l"><input id="chooseImage" type="button" value="隐藏右上角菜单接口" class="btn" /></div>
+	    	<div class="cell cell_r"><input id="chooseImage" type="button" value="显示右上角菜单接口" class="btn" /></div>
+	    	<div class="cell cell_l"><input id="chooseImage" type="button" value="关闭当前网页窗口接口" class="btn" /></div>
+	    	<div class="cell cell_r"><input id="chooseImage" type="button" value="批量隐藏功能按钮接口" class="btn" /></div>
+	    	<div class="cell cell_l"><input id="chooseImage" type="button" value="批量显示功能按钮接口" class="btn" /></div>
+	    	<div class="cell cell_r"><input id="chooseImage" type="button" value="隐藏所有非基础按钮接口" class="btn" /></div>
+	    	<div class="cell cell_l"><input id="chooseImage" type="button" value="显示所有功能按钮接口" class="btn" /></div>
+	    	<div class="cell cell_r"></div>
 	   		
 	    	<div class="cell bgc desc">微信扫一扫</div>
-	    	<div class="cell cell_l"><input id="chooseImage" type="button" value="选择图片" class="btn" /></div>
-	    	<div class="cell cell_r"><input id="chooseImage" type="button" value="选择图片" class="btn" /></div>
+	    	<div class="cell cell_l"><input id="chooseImage" type="button" value="调起微信扫一扫接口" class="btn" /></div>
+	    	<div class="cell cell_r"></div>
 	   		
 	    	<div class="cell bgc desc">微信小店</div>
-	    	<div class="cell cell_l"><input id="chooseImage" type="button" value="选择图片" class="btn" /></div>
-	    	<div class="cell cell_r"><input id="chooseImage" type="button" value="选择图片" class="btn" /></div>
+	    	<div class="cell cell_l"><input id="chooseImage" type="button" value="跳转微信商品页接口" class="btn" /></div>
+	    	<div class="cell cell_r"></div>
 	   		
 	    	<div class="cell bgc desc">微信卡券</div>
-	    	<div class="cell cell_l"><input id="chooseImage" type="button" value="选择图片" class="btn" /></div>
-	    	<div class="cell cell_r"><input id="chooseImage" type="button" value="选择图片" class="btn" /></div>
-	   		
+	    	<div class="cell"><input id="chooseImage" type="button" value="拉取适用卡券列表并获取用户选择信息" class="btn" /></div>
+	    	<div class="cell cell_l"><input id="chooseImage" type="button" value="批量添加卡券接口" class="btn" /></div>
+	    	<div class="cell cell_r"><input id="chooseImage" type="button" value="查看微信卡包中的卡券接口" class="btn" /></div>
+	    	<div class="cell"><input id="chooseImage" type="button" value="核销后再次赠送卡券接口" class="btn" /></div>
+				   		
 	    	<div class="cell bgc desc">微信支付</div>
 	    	<div class="cell cell_l"><input id="chooseImage" type="button" value="选择图片" class="btn" /></div>
 	    	<div class="cell cell_r"><input id="chooseImage" type="button" value="选择图片" class="btn" /></div>

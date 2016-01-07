@@ -2,7 +2,7 @@
 
 body{font-size: 45px; line-height: 50px; margin: 1%;}
 	
-.btn{font-size: 30px; line-height: 30px; border: 1px solid #b1b1b1;}
+.btn{font-size: 30px; line-height: 30px; border: 1px solid #b1b1b1; overflow: hidden; white-space: nowrap;}
 
 .c {text-align: center;}
 .l {text-align: left;}
@@ -21,7 +21,6 @@ body{font-size: 45px; line-height: 50px; margin: 1%;}
 .cell_l {float:left; width: 49.5%; clear: both;}
 .cell_r {float:left; width: 49.5%; margin-left: -2px;}
 
-.desc { clear: both;}
-.dscH{height: 50px;}
+.desc {height: 50px; clear: both; }
 .mgt { margin-top: 100px;}
 

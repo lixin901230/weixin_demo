@@ -464,4 +464,8 @@ wx.ready(function(){
 		    }
 		});
 	});
+	
+	$("#").on("click", function(){
+		
+	});
 });
