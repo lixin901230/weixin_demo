@@ -1,6 +1,5 @@
 /**
  * js通用的工具类
- * @author zhoudonghua
  */
 CommonUtil = function (){
     //var sel = this;
@@ -29,9 +28,29 @@ CommonUtil.getCenterPath = function(){
     return "/center";
 },
 
+//获取完整的协议域名单口地址;如：http://www.lixinsj.com.cn:80
+CommonUtil.getDomainUrl = function() {
+	var localObj = window.location;
+	var domainUrl = localObj.protocol+"//"+localObj.host;
+	return domainUrl;
+},
+
+//获取含有完整协议域名端口的平台发布路径；如：http://www.lixinsj.com.cn:80/weixin
+CommonUtil.getDomainDeployPath = function() {
+	var localObj = window.location;
+	var contextPath = localObj.pathname.split("/")[1];
+	var domainDeployUrl = localObj.protocol+"//"+localObj.host+"/"+contextPath;
+	return domainDeployUrl;
+},
+
 //获取URL的域名
 CommonUtil.getDomainByUrl = function(url){
-    var domain = null;
+	
+	if(url == null || url == "undefined" || url == "") {
+		url = window.location.href;
+	}
+	
+	var domain = null;
     if(url != undefined && url != null){
       var regex = /.*\:\/\/([^\/]*).*/; 
       var match = url.match(regex); 

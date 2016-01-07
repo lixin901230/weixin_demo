@@ -18,7 +18,6 @@
 
 <body>
 	<div class="pd_b50">
-	
 		<input type="hidden" id="unionId" value="${unionId}"/>
 	
 		<!---------- main start ---------->
@@ -39,13 +38,13 @@
 		    	<div class="cell bgc desc">音频接口</div>
 		    	<div class="cell c_l"><input id="startRecord" type="button" value="开始录音接口" class="btn" /></div>
 		    	<div class="cell c_r"><input id="stopRecord" type="button" value="停止录音接口" class="btn" /></div>
-		    	<div class="cell c_l"><input id="startRecord" type="button" value="监听录音自动停止接口" class="btn" /></div>
-		    	<div class="cell c_r"><input id="stopRecord" type="button" value="播放语音接口" class="btn" /></div>
-		    	<div class="cell c_l"><input id="startRecord" type="button" value="暂停播放接口" class="btn" /></div>
-		    	<div class="cell c_r"><input id="stopRecord" type="button" value="停止播放接口" class="btn" /></div>
-		    	<div class="cell c_l"><input id="startRecord" type="button" value="监听语音播放完毕接口" class="btn" /></div>
-		    	<div class="cell c_r"><input id="stopRecord" type="button" value="上传语音接口" class="btn" /></div>
-		    	<div class="cell c_l"><input id="startRecord" type="button" value="下载语音接口" class="btn" /></div>
+		    	<div class="cell c_l"><input id="onVoiceRecordEnd" type="button" value="监听录音自动停止接口" class="btn" /></div>
+		    	<div class="cell c_r"><input id="playVoice" type="button" value="播放语音接口" class="btn" /></div>
+		    	<div class="cell c_l"><input id="pauseVoice" type="button" value="暂停播放接口" class="btn" /></div>
+		    	<div class="cell c_r"><input id="stopVoice" type="button" value="停止播放接口" class="btn" /></div>
+		    	<div class="cell c_l"><input id="onVoicePlayEnd" type="button" value="监听语音播放完毕接口" class="btn" /></div>
+		    	<div class="cell c_r"><input id="uploadVoice" type="button" value="上传语音接口" class="btn" /></div>
+		    	<div class="cell c_l"><input id="downloadVoice" type="button" value="下载语音接口" class="btn" /></div>
 		    	<div class="cell c_r"></div>
 			</div>
 	    	<div class="pd_t50 cb">
