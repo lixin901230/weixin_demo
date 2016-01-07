@@ -55,9 +55,11 @@ public class AccessTokenUtil {
 		// 从缓存中取AccessToken对象，若未获取到缓存的accessToken，则重新获取
 		Object object = CacheUtils.get(ACCESS_TOKEN_CACHE_KEY);
 		if(object != null) {
-			logger.info("\n>>>>>>成功取到缓存中的AccessToken对象！\n");
+			logger.info("\n>>>>>>从缓存中获取AccessToken对象成功！\n");
 			accessToken = (AccessToken) object;
 		} else {
+			
+			logger.info("\n>>>>>>从缓存中获取AccessToken对象失败，开始重新调用微信平台获取access_token...\n");
 			
 			//重新获取AccessToken对象
 			String url = WeixinURLUtil.ACCESS_TOKEN_URL.substring(0, WeixinURLUtil.ACCESS_TOKEN_URL.indexOf("?"));

@@ -79,10 +79,10 @@ public class WeixinJsSdkValidateServlet extends DispatchServletSupport {
 		if(object != null) {
 			
 			jsConfigMap = (Map<String, String>) object;
-			logger.info("\n>>>>>>获取缓存的微信js-sdk接入配置成功！\n");
+			logger.info("\n>>>>>>从缓存中获取微信js-sdk接入配置成功！\n");
 		} else {
 			
-			logger.info("\n>>>>>>微信js-sdk接入配置缓存失效，开始重新获取js-sdk接入配置...\n");
+			logger.info("\n>>>>>>从缓存中获取微信js-sdk接入配置失败，开始重新调用微信平台获取js-sdk接入配置...\n");
 			
 			String targetUrl = request.getParameter("targetUrl");	//页面地址url
 			String appId = request.getParameter("appId");	//	检测是否传入了appId,未传在使用系统中配置的公众号的appId
@@ -94,7 +94,7 @@ public class WeixinJsSdkValidateServlet extends DispatchServletSupport {
 			String jsApiTicket = getJsApiTicket();
 			
 			jsConfigMap = wxJsSdkSignature(appId, jsApiTicket, targetUrl);
-			CacheUtils.put(WX_JS_CONF_CACHE_KEY, jsConfigMap);
+			CacheUtils.put(WX_JS_CONF_CACHE_KEY, jsConfigMap, 5400);
 		}
 		
 		JSONObject jsonObject = JsonUtil.objToJson(ResultHandle.getResultDataMap(jsConfigMap));
