@@ -14,13 +14,14 @@ body{font-size: 45px; line-height: 50px; margin: 1%;}
 .pd15 {padding: 15px;}
 .pd20 {padding: 20px;}
 .pd_b50 {padding-bottom: 150px;}
+.pd_t50 {padding-top: 50px;}
 
 .bgc {background-color: #ececec;}
 
 .cell { height: 65px; padding-top: 10px; color: #000; font-size: 35px; line-height: 40px; list-style: none; border: 2px solid #d0d1d0; margin-top: -2px;}
-.cell_l {float:left; width: 49.5%; clear: both;}
-.cell_r {float:left; width: 49.5%; margin-left: -2px;}
+.c_l {float:left; width: 49.5%; clear: both;}
+.c_r {float:left; width: 49.5%; margin-left: -2px;}
 
-.desc {height: 50px; clear: both; }
+.cb{clear: both;}
+.desc {height: 50px; }
 .mgt { margin-top: 100px;}
-
