@@ -56,7 +56,7 @@
 		    	<div class="cell bgc desc">设备信息</div>
 		    	<div class="cell"><input id="getNetworkType" type="button" value="获取网络状态接口" class="btn" /></div>
 		   	</div>
-	    	<div class="pd_t50 cb">	
+	    	<div class="pd_t50 cb">
 		    	<div class="cell bgc desc">地理位置</div>
 		    	<div class="cell"><input id="openLocation" type="button" value="使用微信内置地图查看位置" class="btn" /></div>
 		    	<div class="cell"><input id="getLocation" type="button" value="获取地理位置" class="btn" /></div>
@@ -67,7 +67,7 @@
 		    	<div class="cell"><input id="stopSearchBeacons" type="button" value="关闭查找周边ibeacon设备" class="btn" /></div>
 		    	<div class="cell"><input id="onSearchBeacons" type="button" value="监听周边ibeacon设备接口" class="btn" /></div>
 		   	</div>
-	    	<div class="pd_t50 cb">	
+	    	<div class="pd_t50 cb">
 		    	<div class="cell bgc desc">界面操作</div>
 		    	<div class="cell c_l"><input id="hideOptionMenu" type="button" value="隐藏右上角菜单接口" class="btn" /></div>
 		    	<div class="cell c_r"><input id="showOptionMenu" type="button" value="显示右上角菜单接口" class="btn" /></div>
@@ -78,11 +78,11 @@
 		    	<div class="cell c_l"><input id="showAllNonBaseMenuItem" type="button" value="隐藏所有非基础按钮接口" class="btn" /></div>
 		    	<div class="cell c_r"></div>
 		   	</div>
-	    	<div class="pd_t50 cb">	
+	    	<div class="pd_t50 cb">
 		    	<div class="cell bgc desc">微信扫一扫</div>
 		    	<div class="cell"><input id="scanQRCode" type="button" value="调起微信扫一扫接口" class="btn" /></div>
 		   	</div>
-	    	<div class="pd_t50 cb">	
+	    	<div class="pd_t50 cb">
 		    	<div class="cell bgc desc">微信小店</div>
 		    	<div class="cell"><input id="openProductSpecificView" type="button" value="跳转微信商品页接口" class="btn" /></div>
 		   	</div>
