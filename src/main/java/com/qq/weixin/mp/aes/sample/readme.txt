@@ -1,3 +1,4 @@
+
 sample目录下的为微信官方签名示例，官方示例下载原链接：http://demo.open.weixin.qq.com/jssdk/sample.zip
 
 JAVA, Node, Python 部分代码只实现了签名算法，需要开发者传入 jsapi_ticket 和 url ，其中 jsapi_ticket 需要通过 http://api.weixin.qq.com/cgi-bin/ticket/getticket?type=jsapi&access_token=ACCESS_TOKEN 接口获取，url 为调用页面的完整 url 。
