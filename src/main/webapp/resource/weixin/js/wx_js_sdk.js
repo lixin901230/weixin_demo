@@ -255,10 +255,11 @@ wx.ready(function(){
 	//下载图片接口
 	$("#downloadImage").on("click", function(){
 		wx.downloadImage({
-		    serverId: '', // 需要下载的图片的服务器端ID，由uploadImage接口获得
+		    serverId: serverIds[0], // 需要下载的图片的服务器端ID，由uploadImage接口获得
 		    isShowProgressTips: 1, // 默认为1，显示进度提示
 		    success: function (res) {
 		        var localId = res.localId; // 返回图片下载后的本地ID
+		        alert("下载的图片的本地ID："+localId);
 		    }
 		});
 	});
@@ -275,9 +276,8 @@ wx.ready(function(){
 	$("#stopRecord").on("click", function(){
 		wx.stopRecord({
 		    success: function (res) {
-		        var localId = res.localId;
-		        alert("录音成功，语音资源ID："+localId);
-		        voiceLocalId = localId;
+		    	voiceLocalId = res.localId;
+		        alert("录音成功，语音资源ID："+voiceLocalId);
 		    }
 		});
 	});
