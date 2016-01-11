@@ -288,7 +288,7 @@ wx.ready(function(){
 		    // 录音时间超过一分钟没有停止的时候会执行 complete 回调
 		    complete: function (res) {
 		    	voiceLocalId = res.localId; 
-		        alert("监听录音自动停止，本地语音资源ID："+localId);
+		        alert("监听录音自动停止，本地语音资源ID："+voiceLocalId);
 		    }
 		});
 	});
