@@ -267,13 +267,17 @@ wx.ready(function(){
 	//开始录音接口
 	$("#startRecord").on("click", function(){
 		wx.startRecord();
+		alert("开始录音...");
 	});
 	
 	//停止录音接口
+	var voiceLocalId = "";	//存储录音后生产的语音资源ID，供后续语音接口使用，如：播放语音接口等等
 	$("#stopRecord").on("click", function(){
 		wx.stopRecord({
 		    success: function (res) {
 		        var localId = res.localId;
+		        alert("录音成功，语音资源ID："+localId);
+		        voiceLocalId = localId;
 		    }
 		});
 	});
@@ -284,6 +288,7 @@ wx.ready(function(){
 		    // 录音时间超过一分钟没有停止的时候会执行 complete 回调
 		    complete: function (res) {
 		        var localId = res.localId; 
+		        alert("监听录音自动停止，本地语音资源ID："+localId);
 		    }
 		});
 	});
@@ -291,21 +296,21 @@ wx.ready(function(){
 	//播放语音接口
 	$("#playVoice").on("click", function(){
 		wx.playVoice({
-		    localId: '' // 需要播放的音频的本地ID，由stopRecord接口获得
+		    localId: voiceLocalId // 需要播放的音频的本地ID，由stopRecord接口获得
 		});
 	});
 	
 	//暂停播放接口
 	$("#pauseVoice").on("click", function(){
 		wx.pauseVoice({
-		    localId: '' // 需要暂停的音频的本地ID，由stopRecord接口获得
+		    localId: voiceLocalId // 需要暂停的音频的本地ID，由stopRecord接口获得
 		});
 	});
 	
 	//停止播放接口
 	$("#stopVoice").on("click", function(){
 		wx.stopVoice({
-		    localId: '' // 需要停止的音频的本地ID，由stopRecord接口获得
+		    localId: voiceLocalId // 需要停止的音频的本地ID，由stopRecord接口获得
 		});
 	});
 	
@@ -314,25 +319,28 @@ wx.ready(function(){
 		wx.onVoicePlayEnd({
 		    success: function (res) {
 		        var localId = res.localId; // 返回音频的本地ID
+		        alert("监听语音播放完毕，语音资源本地ID："+localId);
 		    }
 		});
 	});
 	
 	//上传语音接口
+	var serverId = "";	//服务端语音资源ID，定义该全局变量为了供测试下载语音接口
 	$("#uploadVoice").on("click", function(){
 		wx.uploadVoice({
-		    localId: '', // 需要上传的音频的本地ID，由stopRecord接口获得
+		    localId: voiceLocalId, // 需要上传的音频的本地ID，由stopRecord接口获得
 		    isShowProgressTips: 1, // 默认为1，显示进度提示
 		        success: function (res) {
-		        var serverId = res.serverId; // 返回音频的服务器端ID
+		        serverId = res.serverId; // 返回音频的服务器端ID
 		    }
 		});
+		alert("成功上传刚录制的语音，语音本地ID："+voiceLocalId)
 	});
 	
 	//下载语音接口
 	$("#downloadVoice").on("click", function(){
 		wx.downloadVoice({
-		    serverId: '', // 需要下载的音频的服务器端ID，由uploadVoice接口获得
+		    serverId: serverId, // 需要下载的音频的服务器端ID，由uploadVoice接口获得
 		    isShowProgressTips: 1, // 默认为1，显示进度提示
 		    success: function (res) {
 		        var localId = res.localId; // 返回音频的本地ID
@@ -345,7 +353,7 @@ wx.ready(function(){
 	//识别音频并返回识别结果接口
 	$("#translateVoice").on("click", function(){
 		wx.translateVoice({
-		   localId: '', // 需要识别的音频的本地Id，由录音相关接口获得
+			localId: voiceLocalId, // 需要识别的音频的本地Id，由录音相关接口获得
 		    isShowProgressTips: 1, // 默认为1，显示进度提示
 		    success: function (res) {
 		        alert(res.translateResult); // 语音识别的结果
@@ -360,6 +368,7 @@ wx.ready(function(){
 		wx.getNetworkType({
 		    success: function (res) {
 		        var networkType = res.networkType; // 返回网络类型2g，3g，4g，wifi
+		        alert("网络状态："+networkType);
 		    }
 		});
 	});
