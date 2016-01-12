@@ -375,17 +375,29 @@ wx.ready(function(){
 	});
 
 	//---------------	地理位置	-----------------------
+	//测试数据
+	var res = {
+		latitude: 40.04718, // 纬度，浮点数，范围为90 ~ -90
+	    longitude: 116.3067, // 经度，浮点数，范围为180 ~ -180。
+	    name: '北京市海淀区西二旗', // 位置名
+	    address: '北京市海淀区西二旗', // 地址详情说明
+	    scale: 14, // 地图缩放级别,整形值,范围从1~28。默认为最大
+	    infoUrl: 'http://mp.weixin.qq.com' // 在查看位置界面底部显示的超链接,可点击跳转
+	};
 	//使用微信内置地图查看位置接口
 	$("#openLocation").on("click", function(){
+		openLocationMap(res);	//打开当前地理位置的地图
+	});
+	function openLocationMap(res) {
 		wx.openLocation({
-		    latitude: 0, // 纬度，浮点数，范围为90 ~ -90
-		    longitude: 0, // 经度，浮点数，范围为180 ~ -180。
-		    name: '', // 位置名
+		    latitude: res.latitude, // 纬度，浮点数，范围为90 ~ -90
+		    longitude: res.longitude, // 经度，浮点数，范围为180 ~ -180。
+		    name: '北京市海淀区西二旗', // 位置名
 		    address: '', // 地址详情说明
-		    scale: 1, // 地图缩放级别,整形值,范围从1~28。默认为最大
+		    scale: 14, // 地图缩放级别,整形值,范围从1~28。默认为最大
 		    infoUrl: '' // 在查看位置界面底部显示的超链接,可点击跳转
 		});
-	});
+	}
 	
 	//获取地理位置接口
 	$("#getLocation").on("click", function(){
@@ -394,12 +406,15 @@ wx.ready(function(){
 		    success: function (res) {
 		        var latitude = res.latitude; // 纬度，浮点数，范围为90 ~ -90
 		        var longitude = res.longitude; // 经度，浮点数，范围为180 ~ -180。
+		        alert("纬度："+latitude+"======经度："+longitude);
 		        var speed = res.speed; // 速度，以米/每秒计
 		        var accuracy = res.accuracy; // 位置精度
+		        
+		        //打开地理位置地图
+		        openLocationMap(res);
 		    }
 		});
 	});
-	
 	
 	//---------------	摇一摇周边	-----------------------
 	//开启查找周边ibeacon设备接口
