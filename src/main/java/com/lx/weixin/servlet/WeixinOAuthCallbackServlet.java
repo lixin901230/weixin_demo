@@ -45,7 +45,7 @@ public class WeixinOAuthCallbackServlet extends HttpServlet {
 	
 	private static String APPID;
 	private static String APP_SECRET;
-	private static String GRANT_TYPE = "authorization_code";
+	private final static String GRANT_TYPE = "authorization_code";
 	
 	private String unionId = "";	//微信账号唯一标示
 	
@@ -62,7 +62,6 @@ public class WeixinOAuthCallbackServlet extends HttpServlet {
 			if(properties != null) {
 				APPID = properties.getProperty("appid");
 				APP_SECRET = properties.getProperty("appsecret");
-				GRANT_TYPE = properties.getProperty("grant_type");
 			}
 
 			userLoginRegsiterService = (IUserLoginRegsiterService) ApplicationContextHelper.getBean("userLoginRegsiterService");

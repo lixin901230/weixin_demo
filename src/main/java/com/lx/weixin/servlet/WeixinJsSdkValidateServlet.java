@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.Formatter;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Properties;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
@@ -22,8 +23,8 @@ import org.slf4j.LoggerFactory;
 import com.lx.weixin.cache.CacheUtils;
 import com.lx.weixin.servlet.core.DispatchServletSupport;
 import com.lx.weixin.util.AccessTokenUtil;
-import com.lx.weixin.util.CommonConst;
 import com.lx.weixin.util.JsonUtil;
+import com.lx.weixin.util.LoadWeixinPropertiesConfig;
 import com.lx.weixin.util.ResultHandle;
 
 /**
@@ -42,6 +43,14 @@ public class WeixinJsSdkValidateServlet extends DispatchServletSupport {
 	/** 微信jssdk接入配置缓存key */
 	private static final String WX_JS_CONF_CACHE_KEY = "weixin_@_js_sdk_config";
 	
+	private static String APPID;
+	
+	/** 加载微信公众号账号配置 */
+	static {
+		Properties config = LoadWeixinPropertiesConfig.getInstance().getConfig();
+		APPID = config.getProperty("appid");
+	}
+	
 	/**
 	 * 测试
 	 * @param args
@@ -58,7 +67,7 @@ public class WeixinJsSdkValidateServlet extends DispatchServletSupport {
 			logger.info("\n>>>>>>jsApiTicket："+jsApiTicket+"\n");
 			
 			String url = "http://www.lixinsj.com.cn/weixin/page/weixin/open/weixin_js_sdk.jsp";
-			Map<String, String> params = wxJsSdkSignature(CommonConst.APPID, jsApiTicket, url);
+			Map<String, String> params = wxJsSdkSignature(APPID, jsApiTicket, url);
 			logger.info("\n>>>>>>jsSdkSignature："+params.get("signature")+"\n");
 		}
 	}
@@ -87,7 +96,7 @@ public class WeixinJsSdkValidateServlet extends DispatchServletSupport {
 			String targetUrl = request.getParameter("targetUrl");	//页面地址url
 			String appId = request.getParameter("appId");	//	检测是否传入了appId,未传在使用系统中配置的公众号的appId
 			if(StringUtils.isEmpty(appId)) {
-				appId = CommonConst.APPID;
+				appId = APPID;
 			}
 			
 			//String url = getRequestUrl(request);	//获取请求地址

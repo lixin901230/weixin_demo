@@ -2,6 +2,7 @@ package com.lx.weixin.util;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Properties;
 
 import net.sf.json.JSONObject;
 
@@ -24,16 +25,27 @@ public class AccessTokenUtil {
 	
 	private static Logger logger = LoggerFactory.getLogger(AccessTokenUtil.class);
 	
-	private static final String GRANT_TYPE = "client_credential";
-	private static final String APPID = "wx70b0d2dbde434838";
-	private static final String APPSECRET = "42c8fec5da7afa27bd973488f218342c";
-	
 	/** 微信接口调用凭证access_token缓存key */
 	private static final String ACCESS_TOKEN_CACHE_KEY = "weixin_@_access_token_key";
+
+	private static String APPID;
+	private static String APPSECRET;
+	private final static String GRANT_TYPE = "client_credential";
 	
+	/** 加载微信公众号账号配置 */
+	static {
+		Properties config = LoadWeixinPropertiesConfig.getInstance().getConfig();
+		APPID = config.getProperty("appid");
+		APPSECRET = config.getProperty("appsecret");
+	}
+	
+	/**
+	 * 测试
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		AccessToken accessToken = getAccessToken();
-		System.out.println(accessToken);
+		System.out.println(accessToken.getToken());
 	}
 	
 	/**
@@ -74,16 +86,21 @@ public class AccessTokenUtil {
 				if(state == 200) {
 					String respBodyStr = method.getResponseBodyAsString();
 					JSONObject jsonObject = JsonUtil.strToJson(respBodyStr);
-					String token = jsonObject.getString("access_token");
-					String expiresInStr = jsonObject.getString("expires_in");
-					accessToken = new AccessToken(token, NumberUtil.strToInteger(expiresInStr));
-					
-					CacheUtils.put(ACCESS_TOKEN_CACHE_KEY, accessToken, 5400);	//缓存AccessToken对象，由于access_token有效期为7200秒，故此处缓存有效期为90分钟（5400秒）
+					if(jsonObject.has("access_token")) {
+						
+						String token = jsonObject.getString("access_token");
+						String expiresInStr = jsonObject.getString("expires_in");
+						accessToken = new AccessToken(token, NumberUtil.strToInteger(expiresInStr));
+						
+						CacheUtils.put(ACCESS_TOKEN_CACHE_KEY, accessToken, 5400);	//缓存AccessToken对象，由于access_token有效期为7200秒，故此处缓存有效期为90分钟（5400秒）
+					} else {
+						throw new Exception("获取access_token失败，原因："+jsonObject.toString());
+					}
 				}
 				
 				logger.info("\n>>>>>>微信公众号接口访问认证accessToken ["+accessToken.getToken()+"]\n");
 			} catch (Exception e) {
-				logger.error("\n>>>>>>获取access_token失败！\n");
+				logger.error("\n>>>>>>获取access_token失败，原因："+e+"\n");
 				e.printStackTrace();
 			}
 		}

@@ -465,14 +465,52 @@ wx.ready(function(){
 	//批量隐藏功能按钮接口
 	$("#hideMenuItems").on("click", function(){
 		wx.hideMenuItems({
-	    	menuList: [] // 要隐藏的菜单项，只能隐藏“传播类”和“保护类”按钮，所有menu项见附录3
+			// 要隐藏的菜单项，只能隐藏“传播类”和“保护类”按钮，所有menu项见附录3
+	    	menuList: [
+	    	           'menuItem:share:appMessage',	//传播类 
+	    	           'menuItem:share:timeline', 
+	    	           'menuItem:share:qq',
+	    	           'menuItem:share:weiboApp',
+	    	           'menuItem:favorite',
+	    	           'menuItem:share:facebook',
+	    	           '/menuItem:share:QZone',
+	    	           
+	    	           'menuItem:editTag', 	//保护类
+	    	           'menuItem:delete',
+	    	           'menuItem:copyUrl',
+	    	           'menuItem:originPage', 
+	    	           'menuItem:readMode', 
+	    	           'menuItem:openWithQQBrowser',
+	    	           'menuItem:openWithSafari',
+	    	           'menuItem:share:email',
+	    	           'menuItem:share:brand'
+	    	          ]
 		});
 	});
 	
 	//批量显示功能按钮接口
 	$("#showMenuItems").on("click", function(){
 		wx.showMenuItems({
-		    menuList: [] // 要显示的菜单项，所有menu项见附录3
+			// 要显示的菜单项，所有menu项见附录3
+		    menuList: [
+	    	           'menuItem:share:appMessage',	//传播类 
+	    	           'menuItem:share:timeline', 
+	    	           'menuItem:share:qq',
+	    	           'menuItem:share:weiboApp',
+	    	           'menuItem:favorite',
+	    	           'menuItem:share:facebook',
+	    	           '/menuItem:share:QZone',
+	    	           
+	    	           'menuItem:editTag', 	//保护类
+	    	           'menuItem:delete',
+	    	           'menuItem:copyUrl',
+	    	           'menuItem:originPage', 
+	    	           'menuItem:readMode', 
+	    	           'menuItem:openWithQQBrowser',
+	    	           'menuItem:openWithSafari',
+	    	           'menuItem:share:email',
+	    	           'menuItem:share:brand'
+	    	           ]
 		});
 	});
 	
@@ -505,8 +543,8 @@ wx.ready(function(){
 	//跳转微信商品页接口
 	$("#openProductSpecificView").on("click", function(){
 		wx.openProductSpecificView({
-		    productId: '', // 商品id
-		    viewType: '' // 0.默认值，普通商品详情页1.扫一扫商品详情页2.小店商品详情页
+		    productId: '12', // 商品id
+		    viewType: '0' // 0.默认值，普通商品详情页1.扫一扫商品详情页2.小店商品详情页
 		});
 	});
 	
