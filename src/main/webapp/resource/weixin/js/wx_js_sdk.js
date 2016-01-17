@@ -282,6 +282,10 @@ wx.ready(function(){
 	//停止录音接口
 	var voiceLocalId = "";	//存储录音后生产的语音资源ID，供后续语音接口使用，如：播放语音接口等等
 	$("#stopRecord").on("click", function(){
+		if(voiceLocalId == null || voiceLocalId == "") {
+			alert("还未开始录音，请先使用“开始录音接口”开始录音后再来操作");
+			return;
+		}
 		wx.stopRecord({
 		    success: function (res) {
 		    	voiceLocalId = res.localId;
@@ -292,6 +296,10 @@ wx.ready(function(){
 	
 	//监听录音自动停止接口
 	$("#onVoiceRecordEnd").on("click", function(){
+		if(voiceLocalId == null || voiceLocalId == "") {
+			alert("请先使用“开始录音接口”开始录音，并在录音过程中点击此按钮");
+			return;
+		}
 		wx.onVoiceRecordEnd({
 		    // 录音时间超过一分钟没有停止的时候会执行 complete 回调
 		    complete: function (res) {
@@ -303,6 +311,10 @@ wx.ready(function(){
 	
 	//播放语音接口
 	$("#playVoice").on("click", function(){
+		if(voiceLocalId == null || voiceLocalId == "") {
+			alert("请先使用“开始录音接口”录音后再播放");
+			return;
+		}
 		wx.playVoice({
 		    localId: voiceLocalId // 需要播放的音频的本地ID，由stopRecord接口获得
 		});
@@ -310,6 +322,10 @@ wx.ready(function(){
 	
 	//暂停播放接口
 	$("#pauseVoice").on("click", function(){
+		if(voiceLocalId == null || voiceLocalId == "") {
+			alert("请先使用“播放语音接口”播放语音后再来操作");
+			return;
+		}
 		wx.pauseVoice({
 		    localId: voiceLocalId // 需要暂停的音频的本地ID，由stopRecord接口获得
 		});
@@ -317,6 +333,10 @@ wx.ready(function(){
 	
 	//停止播放接口
 	$("#stopVoice").on("click", function(){
+		if(voiceLocalId == null || voiceLocalId == "") {
+			alert("请先使用“播放语音接口”播放语音后再来操作");
+			return;
+		}
 		wx.stopVoice({
 		    localId: voiceLocalId // 需要停止的音频的本地ID，由stopRecord接口获得
 		});
@@ -324,6 +344,10 @@ wx.ready(function(){
 	
 	//监听语音播放完毕接口
 	$("#onVoicePlayEnd").on("click", function(){
+		if(voiceLocalId == null || voiceLocalId == "") {
+			alert("当前为播放语音，请播放语音并在播放过程中点击此按钮");
+			return;
+		}
 		wx.onVoicePlayEnd({
 		    success: function (res) {
 		    	voiceLocalId = res.localId; // 返回音频的本地ID
@@ -369,6 +393,10 @@ wx.ready(function(){
 	//---------------	智能接口	-----------------------
 	//识别音频并返回识别结果接口
 	$("#translateVoice").on("click", function(){
+		if(voiceLocalId == null || voiceLocalId == "") {
+			alert("请先使用“开始录音接口”录音后再来操作");
+			return;
+		}
 		wx.translateVoice({
 			localId: voiceLocalId, // 需要识别的音频的本地Id，由录音相关接口获得
 		    isShowProgressTips: 1, // 默认为1，显示进度提示
@@ -389,6 +417,20 @@ wx.ready(function(){
 		    }
 		});
 	});
+	
+
+	//---------------	微信扫一扫	-----------------------
+	//调起微信扫一扫接口
+	$("#scanQRCode").on("click", function(){
+		wx.scanQRCode({
+		    needResult: 0, // 默认为0，扫描结果由微信处理，1则直接返回扫描结果，
+		    scanType: ["qrCode","barCode"], // 可以指定扫二维码还是一维码，默认二者都有
+		    success: function (res) {
+		   		var result = res.resultStr; // 当needResult 为 1 时，扫码返回的结果
+			}
+		});
+	});
+	
 
 	//---------------	地理位置	-----------------------
 	//测试数据
@@ -432,45 +474,18 @@ wx.ready(function(){
 		});
 	});
 	
-	//---------------	摇一摇周边	-----------------------
-	//开启查找周边ibeacon设备接口
-	$("#startSearchBeacons").on("click", function(){
-		wx.startSearchBeacons({
-			ticket:"",  //摇周边的业务ticket, 系统自动添加在摇出来的页面链接后面
-			complete:function(argv){
-				//开启查找完成后的回调函数
-			}
-		});
-	});
-	
-	//关闭查找周边ibeacon设备接口
-	$("#stopSearchBeacons").on("click", function(){
-		wx.stopSearchBeacons({
-			complete:function(res){
-				//关闭查找完成后的回调函数
-			}
-		});
-	});
-	
-	//监听周边ibeacon设备接口
-	$("#onSearchBeacons").on("click", function(){
-		wx.onSearchBeacons({
-			complete:function(argv){
-				//回调函数，可以数组形式取得该商家注册的在周边的相关设备列表
-			}
-		});
-	});
-	
 	
 	//---------------	界面操作	-----------------------
 	//隐藏右上角菜单接口
 	$("#hideOptionMenu").on("click", function(){
 		wx.hideOptionMenu();
+		alert("右上角菜单中的内容已隐藏，请点击右上角菜单查看");
 	});
 	
 	//显示右上角菜单接口
 	$("#showOptionMenu").on("click", function(){
 		wx.showOptionMenu();
+		alert("右上角菜单中的内容已显示，请点击右上角菜单查看");
 	});
 	
 	//关闭当前网页窗口接口
@@ -502,6 +517,7 @@ wx.ready(function(){
 	    	           'menuItem:share:brand'
 	    	          ]
 		});
+		alert("右上角菜单中指定的功能按钮已隐藏，请点击右上角菜单查看");
 	});
 	
 	//批量显示功能按钮接口
@@ -528,28 +544,48 @@ wx.ready(function(){
 	    	           'menuItem:share:brand'
 	    	           ]
 		});
+		alert("右上角菜单中指定的功能按钮已显示，请点击右上角菜单查看");
 	});
 	
 	//隐藏所有非基础按钮接口
 	$("#hideAllNonBaseMenuItem").on("click", function(){
 		wx.hideAllNonBaseMenuItem();
 		// “基本类”按钮详见附录3
+		alert("右上角菜单中所有非基础按钮已隐藏，请点击右上角菜单查看");
 	});
 
 	//显示所有功能按钮接口
 	$("#showAllNonBaseMenuItem").on("click", function(){
 		wx.showAllNonBaseMenuItem();
+		alert("右上角菜单中所有功能按钮已显示，请点击右上角菜单查看");
 	});
 	
 	
-	//---------------	微信扫一扫	-----------------------
-	//调起微信扫一扫接口
-	$("#scanQRCode").on("click", function(){
-		wx.scanQRCode({
-		    needResult: 0, // 默认为0，扫描结果由微信处理，1则直接返回扫描结果，
-		    scanType: ["qrCode","barCode"], // 可以指定扫二维码还是一维码，默认二者都有
-		    success: function (res) {
-		   		var result = res.resultStr; // 当needResult 为 1 时，扫码返回的结果
+	//---------------	摇一摇周边	-----------------------
+	//开启查找周边ibeacon设备接口
+	$("#startSearchBeacons").on("click", function(){
+		wx.startSearchBeacons({
+			ticket:"",  //摇周边的业务ticket, 系统自动添加在摇出来的页面链接后面
+			complete:function(argv){
+				//开启查找完成后的回调函数
+			}
+		});
+	});
+	
+	//关闭查找周边ibeacon设备接口
+	$("#stopSearchBeacons").on("click", function(){
+		wx.stopSearchBeacons({
+			complete:function(res){
+				//关闭查找完成后的回调函数
+			}
+		});
+	});
+	
+	//监听周边ibeacon设备接口
+	$("#onSearchBeacons").on("click", function(){
+		wx.onSearchBeacons({
+			complete:function(argv){
+				//回调函数，可以数组形式取得该商家注册的在周边的相关设备列表
 			}
 		});
 	});
