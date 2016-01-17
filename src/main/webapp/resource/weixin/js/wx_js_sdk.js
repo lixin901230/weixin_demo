@@ -223,6 +223,10 @@ wx.ready(function(){
 	
 	//上传图片接口（注意：默认只上传一张图片，自己做轮询去上传）
 	$("#uploadImage").on("click", function(){
+		if(localIds == "") {
+			alert("请点击“拍照或从手机相册中选图”按钮选择要上传的图片");
+			return;
+		}
 		alert("已选中待上传的图片本地id："+localIds);
 		syncUpload(localIds);
 	});
@@ -254,6 +258,10 @@ wx.ready(function(){
 	
 	//下载图片接口
 	$("#downloadImage").on("click", function(){
+		if(serverIds == null || serverIds.length == 0) {
+			alert("请点击“上传图片接口”按钮先上传图片再下载");
+			return;
+		}
 		wx.downloadImage({
 		    serverId: serverIds[0], // 需要下载的图片的服务器端ID，由uploadImage接口获得
 		    isShowProgressTips: 1, // 默认为1，显示进度提示
@@ -327,6 +335,10 @@ wx.ready(function(){
 	//上传语音接口
 	var serverId = "";	//服务端语音资源ID，定义该全局变量为了供测试下载语音接口
 	$("#uploadVoice").on("click", function(){
+		if(voiceLocalId == null || voiceLocalId == "") {
+			alert("请先使用“开始录音接口”录音后再上传");
+			return;
+		}
 		wx.uploadVoice({
 		    localId: voiceLocalId, // 需要上传的音频的本地ID，由stopRecord接口获得
 		    isShowProgressTips: 1, // 默认为1，显示进度提示
@@ -339,6 +351,10 @@ wx.ready(function(){
 	
 	//下载语音接口
 	$("#downloadVoice").on("click", function(){
+		if(serverId == null || serverId == "") {
+			alert("请先使用“上传语音接口”上传语音资源后再下载");
+			return;
+		}
 		wx.downloadVoice({
 		    serverId: serverId, // 需要下载的音频的服务器端ID，由uploadVoice接口获得
 		    isShowProgressTips: 1, // 默认为1，显示进度提示
