@@ -8,6 +8,7 @@ import net.sf.json.JSONObject;
 
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.methods.GetMethod;
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -30,13 +31,17 @@ public class AccessTokenUtil {
 
 	private static String APPID;
 	private static String APPSECRET;
-	private final static String GRANT_TYPE = "client_credential";
+	private static String GRANT_TYPE = "client_credential";
 	
 	/** 加载微信公众号账号配置 */
 	static {
 		Properties config = LoadWeixinPropertiesConfig.getInstance().getConfig();
 		APPID = config.getProperty("appid");
 		APPSECRET = config.getProperty("appsecret");
+		String grant_type_temp = config.getProperty("grant_type");
+		if(StringUtils.isEmpty(grant_type_temp)) {
+			GRANT_TYPE = grant_type_temp;
+		}
 	}
 	
 	/**
