@@ -22,3 +22,23 @@
 		"url":"http://inside.kfkc.webtrn.cn/weixin/open/loadDown.action"
 	}]
 }
+
+
+更换后的最新菜单json
+{
+	"button":
+	[{	
+		"type":"view",
+		"name":"全部课程",
+		"url":"https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx1b6860bba9390566&redirect_uri=http%3A%2F%2Fmooc.learn.webtrn.cn%2Fweixin%2Fopen%2FweixinOAuthCallback_wxOauthCallback.action&response_type=code&scope=snsapi_userinfo&state=0#wechat_redirect"
+	},
+	{	
+		"type":"view",
+		"name":"我的",
+		"url":"https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx1b6860bba9390566&redirect_uri=http%3A%2F%2Fmooc.learn.webtrn.cn%2Fweixin%2Fopen%2FweixinOAuthCallback_wxOauthCallback.action&response_type=code&scope=snsapi_userinfo&state=1#wechat_redirect"
+	},{	
+		"type":"view",
+		"name":"APP下载",
+		"url":"http://mooc.learn.webtrn.cn/weixin/open/loadDown.action"
+	}]
+}

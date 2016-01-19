@@ -19,6 +19,7 @@ public class CacheUtils {
 	
 	/** 使用并发HashMap来做静态缓存 */
 	private static Map<String, Object> cacheMap = new ConcurrentHashMap<String, Object>();
+	private final static Timer timer = new Timer();
 	
 	/**
 	 * 存入缓存
@@ -42,7 +43,6 @@ public class CacheUtils {
 		
 		//@FIX 如果并发的情况，此处可能会造成线程堆积或机器CPU资源耗尽的情况，考虑单例模式如何？
 		//设置缓存有效期
-		Timer timer = new Timer();
 		TimerTask task = new TimerTask() {
 			
 			@Override

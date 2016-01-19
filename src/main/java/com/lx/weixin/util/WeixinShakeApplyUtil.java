@@ -31,7 +31,7 @@ public class WeixinShakeApplyUtil {
 //		System.out.println(applyOpenShake().toString());
 		
 		//查询审核状态
-//		System.out.println(queryCheckState().toString());
+		System.out.println(queryCheckState().toString());
 	}
 	
 	/**
