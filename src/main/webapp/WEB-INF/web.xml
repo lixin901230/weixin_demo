@@ -17,15 +17,7 @@
     <param-value>classpath:applicationContext*.xml</param-value>
   </context-param>
   
-  <servlet>
-    <servlet-name>WeixinValidateCallbackServlet</servlet-name>
-    <servlet-class>com.lx.weixin.servlet.WeixinValidateCallbackServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>WeixinValidateCallbackServlet</servlet-name>
-    <url-pattern>/api/service</url-pattern>
-  </servlet-mapping>
-  
+  <!-- 文件上传工具类 -->  
   <servlet>
   	<servlet-name>FileUploadUtil</servlet-name>
   	<servlet-class>com.lx.weixin.httpClient.FileUploadUtil</servlet-class>
@@ -36,6 +28,16 @@
   </servlet-mapping>
   
   <servlet>
+    <servlet-name>WeixinValidateCallbackServlet</servlet-name>
+    <servlet-class>com.lx.weixin.servlet.WeixinValidateCallbackServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>WeixinValidateCallbackServlet</servlet-name>
+    <url-pattern>/api/service</url-pattern>
+  </servlet-mapping>
+    
+  <!-- 微信第三方网页授权授权验证回调Servlet -->
+  <servlet>
   	<servlet-name>WeixinOAuthCallbackServlet</servlet-name>
   	<servlet-class>com.lx.weixin.servlet.WeixinOAuthCallbackServlet</servlet-class>
   </servlet>
@@ -44,6 +46,7 @@
   	<url-pattern>/wxOAuthCallback.do</url-pattern>
   </servlet-mapping>
   
+  <!-- 微站接入微信JS-SDK验证Servlet -->
   <servlet>
   	<servlet-name>WeixinJsSdkValidateServlet</servlet-name>
   	<servlet-class>com.lx.weixin.servlet.WeixinJsSdkValidateServlet</servlet-class>
@@ -52,7 +55,8 @@
   	<servlet-name>WeixinJsSdkValidateServlet</servlet-name>
   	<url-pattern>/jssdk/wxJsSdkValidateServlet</url-pattern>
   </servlet-mapping>
-
+  
+  <!-- 微信公众号——》微站登录注册 -->
   <servlet>
   	<servlet-name>LoginRegsiterServlet</servlet-name>
   	<servlet-class>com.lx.weixin.servlet.LoginRegsiterServlet</servlet-class>
@@ -69,4 +73,24 @@
   	<servlet-name>LoginRegsiterServlet</servlet-name>
   	<url-pattern>/LoginRegsiterServlet_*</url-pattern>
   </servlet-mapping> -->
+  
+  <!-- 网站手机扫二维码登录——》手机端扫描登录 -->
+  <servlet>
+  	<servlet-name>PhoneQrCodeLoginServlet</servlet-name>
+  	<servlet-class>com.lx.weixin.servlet.qrCodeLogin.PhoneQrCodeLoginServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>PhoneQrCodeLoginServlet</servlet-name>
+  	<url-pattern>/PhoneQrCodeLoginServlet/*</url-pattern>
+  </servlet-mapping>
+  
+  <!-- 网站手机扫二维码登录——》服务端轮询（或长连接）监听手机端登录 -->
+  <servlet>
+  	<servlet-name>LongConnectionCheckServlet</servlet-name>
+  	<servlet-class>com.lx.weixin.servlet.qrCodeLogin.LongConnectionCheckServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>LongConnectionCheckServlet</servlet-name>
+  	<url-pattern>/LongConnectionCheckServlet/*</url-pattern>
+  </servlet-mapping>
 </web-app>

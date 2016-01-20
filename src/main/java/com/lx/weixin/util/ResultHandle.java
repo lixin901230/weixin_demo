@@ -30,6 +30,19 @@ public class ResultHandle {
 	/**
 	 * @param success	请求成功、失败标记；true：成功；false：失败
 	 * @param data		请求数据
+	 * @return
+	 */
+	public static Map<String, Object> getResultMap(boolean success, Object data) {
+		
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		resultMap.put("success", success);
+		resultMap.put("data", data);
+		return resultMap;
+	}
+	
+	/**
+	 * @param success	请求成功、失败标记；true：成功；false：失败
+	 * @param data		请求数据
 	 * @param msg		请求成功、失败信息
 	 * @return
 	 */

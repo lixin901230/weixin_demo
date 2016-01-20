@@ -45,38 +45,6 @@ public class LoginRegsiterServlet extends DispatchServletSupport {
 	}
 	
 	/**
-	 * 分发请求
-	 * @param request
-	 * @param response
-	 */
-	/*public void dispatchMethod(HttpServletRequest request, HttpServletResponse response) {
-		String methodName = request.getParameter("method");
-		if(StringUtils.isEmpty(methodName)) {	
-			String requestURI = request.getRequestURI();
-			StringBuffer requestURL = request.getRequestURL();
-			System.out.println("requestURI="+requestURI+"\nrequestURL="+requestURL);
-			int paramsIndex = requestURL.indexOf("?");
-			String urlTemp = "";
-			if(paramsIndex > -1) {
-				urlTemp = requestURL.substring(0, paramsIndex);
-				String urlTempPart = urlTemp.substring(urlTemp.lastIndexOf("/"));
-				if(urlTempPart.lastIndexOf("_") > -1) {
-					methodName = urlTempPart.substring(urlTempPart.lastIndexOf("_"));
-				}
-			}
-		}
-
-		try {
-			Method method = getClass().getDeclaredMethod(methodName, HttpServletRequest.class, HttpServletResponse.class);
-			method.setAccessible(true);	//释放私有方法调用访问权限
-			method.invoke(this, request, response);
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}*/
-	
-	/**
 	 * 检测注册的用户名是否已存在
 	 * @param request
 	 * @param response
