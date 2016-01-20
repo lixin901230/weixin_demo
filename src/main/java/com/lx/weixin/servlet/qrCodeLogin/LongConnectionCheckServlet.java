@@ -28,7 +28,6 @@ public class LongConnectionCheckServlet extends DispatchServletSupport {
 		String uuid = request.getParameter("uuid");
 		UserInfo userInfo = null;
 		boolean flag = true;
-		
 		//此处仅为了模拟长连接监听移动端扫码后的登录状态，需要优化改成websocket长连接形式
 		while(flag) {
 			userInfo = PhoneQrCodeLoginServlet.getLoginUserMap().get(uuid);
