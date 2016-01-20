@@ -16,8 +16,8 @@ public class FileUtil {
 	 * @return
 	 */
 	public static String getResRealPath() {
-		String absolutePath = Class.class.getResource("/").getPath();
-		int startIndex = absolutePath.startsWith(File.separator) ? 1 : 0;
+		String absolutePath = FileUtil.class.getClassLoader().getResource("").getPath();
+		int startIndex = absolutePath.startsWith("/") ? 1 : 0;
 		String resPath = absolutePath.substring(startIndex, absolutePath.indexOf("WEB-INF"));
 		return resPath;
 	}
@@ -30,8 +30,8 @@ public class FileUtil {
      */
     public static String getIncomingDirPath() {
     	String resRealPath = getResRealPath();
-		resRealPath = resRealPath.endsWith(File.separator) ? resRealPath : resRealPath + File.separator; 
-		String fileDirPath = resRealPath + FileUtil.UPLOAD_PATH + File.separator;
+		resRealPath = resRealPath.endsWith("/") ? resRealPath : resRealPath + "/"; 
+		String fileDirPath = resRealPath + FileUtil.UPLOAD_PATH + "/";
 		return fileDirPath;
     }
 }

@@ -8,6 +8,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import net.sf.json.JSONObject;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -35,6 +37,8 @@ public class PhoneQrCodeLoginServlet extends DispatchServletSupport {
 	
 	private IUserLoginRegsiterService userLoginRegsiterService;
 	
+	private static final String CUR_LOGIN_USER = "cur_Login_User";	//当前登录用户session的key
+	
 	public static Map<String, UserInfo> loginUserMap = new HashMap<String, UserInfo>();
 	
 	@Override
@@ -55,9 +59,10 @@ public class PhoneQrCodeLoginServlet extends DispatchServletSupport {
 		String uuid = CommonUtils.uuid();
 		String qrCodeName = "login_qrcode_"+ uuid + (int) (new Date().getTime() / 1000) + ".jpg";
 		String filePath = FileUtil.getIncomingDirPath() + qrCodeName;
-		String content = CommonUtils.getDeplyPath(request) +"/page/weixin/open/login.jsp?uuid="+ uuid;
+		String deplyPath = CommonUtils.getDeplyPath(request);
+		String content = "http://www.lixinsj.com.cn/weixin/page/qrCodeLogin/login.jsp?uuid="+ uuid;
 		
-		String qrCodeImgUrl = "";  
+		String qrCodeImgUrl = "";
 		try {
 			ZXingQRCodeUtil qrCodeUtil = new ZXingQRCodeUtil();
 			qrCodeUtil.generateQRCodeImage(filePath, content);
@@ -66,6 +71,8 @@ public class PhoneQrCodeLoginServlet extends DispatchServletSupport {
 			success = false;
 			e.printStackTrace();
 		}
+		
+		logger.info("\n>>>>>>生成的登录二维码图片地址："+qrCodeImgUrl+"\n");
 		
 		Map<String, Object> result = new HashMap<String, Object>();
 		result.put("uuid", uuid);
@@ -84,10 +91,17 @@ public class PhoneQrCodeLoginServlet extends DispatchServletSupport {
 		String uuid = request.getParameter("uuid");
 		String userName = request.getParameter("userName");
 		String password = request.getParameter("password");
+		
+		logger.info("\n>>>>>>uuid："+uuid+"\n");
 		UserInfo user = userLoginRegsiterService.getUserInfo(userName, password);
-		if(user != null) {
+		if(uuid != null && user != null) {
+			request.getSession().setAttribute(CUR_LOGIN_USER, user);
 			loginUserMap.put(uuid, user);
+			logger.info("\n>>>>>>用户："+user.getUserName()+"登录成功！\n");
 		}
+		Map<String, Object> resultDataMap = ResultHandle.getResultMap(true, "登录成功");
+		String jsonStr = JsonUtil.objToStr(resultDataMap);
+		JsonUtil.writeJsonStr(response, jsonStr);
 	}
 
 	public static Map<String, UserInfo> getLoginUserMap() {

@@ -15,7 +15,6 @@ import org.apache.commons.httpclient.methods.GetMethod;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.lx.weixin.bean.AccessToken;
 import com.lx.weixin.httpClient.HttpClientUtil;
 import com.lx.weixin.util.AccessTokenUtil;
 import com.lx.weixin.util.FileUtil;
@@ -38,6 +37,7 @@ public class QRCodeUtil {
 		
 		try {
 			String filePath = FileUtil.getIncomingDirPath();	//文件存放路径
+			System.out.println(filePath);
 			String fileName = "qr_weixin";						//文件名称
 			String fileExt = ".jpg";							//文件扩展名
 			File qrFile = new File(filePath, fileName + fileExt);

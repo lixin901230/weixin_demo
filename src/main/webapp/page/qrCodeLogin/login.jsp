@@ -11,8 +11,11 @@
 </head>
 <body>
 	<div class="auto">
-	
-		<input type="hidden" id="unionId" value="${unionId}"/>
+		<%
+			String uuid = request.getParameter("uuid");
+			System.out.println("===="+uuid);
+		%>
+		<input type="hidden" id="uuid" value="<%=uuid%>"/>
 	
 		<!---------- main start ---------->
 	    <div>

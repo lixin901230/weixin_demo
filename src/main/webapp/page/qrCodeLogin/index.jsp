@@ -7,10 +7,12 @@
 	<title>网站扫码登录</title>
 	<%@ include file="common/head.jsp"%>
 </head>
-<body style="font-size: 45px;">
+<body style="font-size: 45px; text-align: center;">
 	<div>
 		<div>PC端网站扫码登录</div>
-		<div><img src="" id="QrCodeImg" title="扫二维码登录"/></div>
+		<div><img src="" id="qrCodeImg" title="扫二维码登录"/></div>
+		<div id="userName_msg"></div>
+		
 	</div>
 </body>
 </html>
