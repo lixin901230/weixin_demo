@@ -8,6 +8,8 @@ import org.slf4j.LoggerFactory;
 
 import com.lx.weixin.servlet.core.DispatchServletSupport;
 import com.lx.weixin.spring.bean.UserInfo;
+import com.lx.weixin.util.JsonUtil;
+import com.lx.weixin.util.ResultHandle;
 
 /**
  * 网站手机扫二维码登录——》服务端轮询（或长连接）监听手机端登录
@@ -19,22 +21,23 @@ public class LongConnectionCheckServlet extends DispatchServletSupport {
 	
 	public static Logger logger = LoggerFactory.getLogger(LongConnectionCheckServlet.class);
 	
-	private static final String CUR_LOGIN_USER = "cur_Login_User";	//当前登录用户session的key
-	
 	/**
 	 * 检查手机端扫二维码登录状态
 	 */
 	public void checkPhoneLoginState(HttpServletRequest request, HttpServletResponse response) {
 		String uuid = request.getParameter("uuid");
+		UserInfo userInfo = null;
 		boolean flag = true;
+		System.out.println("checkPhoneLoginState——uuid="+uuid);
 		while(flag) {
-			UserInfo userInfo = PhoneQrCodeLoginServlet.getLoginUserMap().get(uuid);
+			userInfo = PhoneQrCodeLoginServlet.getLoginUserMap().get(uuid);
 			if(userInfo != null) {
-				request.getSession().setAttribute(CUR_LOGIN_USER, userInfo);
+				logger.info(">>>>>>PC端登录成功！");
 				PhoneQrCodeLoginServlet.getLoginUserMap().remove(uuid);
 				flag = false;
-				logger.info("\n>>>>>>用户："+userInfo.getUserName()+"登录成功！\n");
 			}
 		}
+		String jsonStr = JsonUtil.objToStr(ResultHandle.getResultMap(true, userInfo));
+		JsonUtil.writeJsonStr(response, jsonStr);
 	}
 }

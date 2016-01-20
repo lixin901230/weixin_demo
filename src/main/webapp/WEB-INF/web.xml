@@ -6,7 +6,8 @@
 	version="2.5">
   <display-name>weixin_demo</display-name>
   <welcome-file-list>
-    <welcome-file>page/weixin/open/index.jsp</welcome-file>
+    <welcome-file>index.html</welcome-file>
+<!--     <welcome-file>page/weixin/open/index.jsp</welcome-file> -->
   </welcome-file-list>
   
   <listener>
