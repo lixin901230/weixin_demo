@@ -50,7 +50,8 @@ public class WeixinOAuthCallbackServlet extends HttpServlet {
 	private String unionId = "";	//微信账号唯一标示
 	
 	public static void main(String[] args) throws Exception {
-		String url = URLEncoder.encode("http://www.lixinsj.com.cn/weixin/wxOAuthCallback.do", "UTF-8");
+//		String url = URLEncoder.encode("http://www.lixinsj.com.cn/weixin/wxOAuthCallback.do", "UTF-8");
+		String url = URLEncoder.encode("http://www.lixinsj.com.cn/weixin/page/weixin/auth/myIndex.jsp", "UTF-8");
 		System.out.println(url);
 	}
 

@@ -12,7 +12,6 @@
 	
 	<!-- 引入微信在线js -->
 	<!-- <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js" type="text/javascript"></script> -->
-	<script src="${ctx}/resource/weixin/js/jweixin-1.0.0.js" type="text/javascript"></script>
 	<script src="${ctx}/resource/weixin/js/wx_js_sdk.js" type="text/javascript"></script>
 </head>
 

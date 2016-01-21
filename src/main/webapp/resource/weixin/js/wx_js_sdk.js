@@ -92,94 +92,94 @@ wx.ready(function(){
 	    success: function(res) {
 	        // 以键值对的形式返回，可用的api值true，不可用为false；如：{"checkResult":{"chooseImage":true},"errMsg":"checkJsApi:ok"}
 	        console.info(">>>>>>wx.checkJsApi："+res);
-	        
-	        
-	        //######################	js-sdk	调试		################################
-	        
-	        //---------------	分享接口	-----------------------
-			
-			//分享接口：获取“分享到朋友圈”按钮点击状态及自定义分享内容接口
-			wx.onMenuShareTimeline({
-				title: '分享到朋友圈测试', // 分享标题
-			    link: 'http://www.lixinsj.com.cn/weixin/page/weixin/open/weixin_js_sdk.jsp', // 分享链接
-			    imgUrl: 'http://www.lixinsj.com.cn/weixin/incoming/qrcode.jpg', // 分享图标
-			    trigger: function (res) {
-	                alert('触发点击分享到朋友圈');
-	            },
-			    success: function () { 
-			        // 用户确认分享后执行的回调函数
-			        alert("分享到朋友圈测试成功！");
-			    },
-			    cancel: function () { 
-			        // 用户取消分享后执行的回调函数
-			        alert("取消分享到朋友圈测试成功！");
-			    }
-			});
-	
-			//分享接口：获取“分享给朋友”按钮点击状态及自定义分享内容接口
-			wx.onMenuShareAppMessage({
-				title: '分享给朋友', // 分享标题
-			    desc: '微信公众号开发js-sdk测试——分享给朋友', // 分享描述
-			    link: 'http://www.lixinsj.com.cn/weixin/page/weixin/open/weixin_js_sdk.jsp', // 分享链接
-			    imgUrl: 'http://www.lixinsj.com.cn/weixin/incoming/qrcode.jpg', // 分享图标
-			    success: function () { 
-			       // 用户确认分享后执行的回调函数
-			       alert("分享给朋友测试成功！");
-			    },
-			    cancel: function () { 
-			       // 用户取消分享后执行的回调函数
-			        alert("取消分享给朋友测试成功！");
-			    }
-			});
-			
-			//分享接口：获取“分享到QQ”按钮点击状态及自定义分享内容接口
-			wx.onMenuShareQQ({
-				title: '分享到QQ', // 分享标题
-			    desc: '微信公众号开发js-sdk测试——分享到QQ', // 分享描述
-			    link: 'http://www.lixinsj.com.cn/weixin/page/weixin/open/weixin_js_sdk.jsp', // 分享链接
-			    imgUrl: 'http://www.lixinsj.com.cn/weixin/incoming/qrcode.jpg', // 分享图标
-			    success: function () { 
-			       // 用户确认分享后执行的回调函数
-			       alert("分享到QQ测试成功！");
-			    },
-			    cancel: function () { 
-			       // 用户取消分享后执行的回调函数
-			       alert("取消分享到QQ测试成功！");
-			    }
-			});
-			
-			//分享接口：获取“分享到腾讯微博”按钮点击状态及自定义分享内容接口
-			wx.onMenuShareWeibo({
-				title: '分享到微博', // 分享标题
-			    desc: '微信公众号开发js-sdk测试——分享到微博', // 分享描述
-			    link: 'http://www.lixinsj.com.cn/weixin/page/weixin/open/weixin_js_sdk.jsp', // 分享链接
-			    imgUrl: 'http://www.lixinsj.com.cn/weixin/incoming/qrcode.jpg', // 分享图标
-			    success: function () { 
-			       // 用户确认分享后执行的回调函数
-			       alert("分享到腾讯微博测试成功！");
-			    },
-			    cancel: function () { 
-			        // 用户取消分享后执行的回调函数
-			        alert("取消分享到腾讯微博测试成功！");
-			    }
-			});
-			
-			//分享接口：获取“分享到QQ空间”按钮点击状态及自定义分享内容接口
-			wx.onMenuShareQZone({
-				title: '分享到QQ空间', // 分享标题
-			    desc: '微信公众号开发js-sdk测试——分享到QQ空间', // 分享描述
-			    link: 'http://www.lixinsj.com.cn/weixin/page/weixin/open/weixin_js_sdk.jsp', // 分享链接
-			    imgUrl: 'http://www.lixinsj.com.cn/weixin/incoming/qrcode.jpg', // 分享图标
-			    success: function () {
-			       // 用户确认分享后执行的回调函数
-			       alert("分享到QQ空间测试成功！");
-			    },
-			    cancel: function () { 
-			        // 用户取消分享后执行的回调函数
-			        alert("取消分享到QQ空间测试成功！");
-			    }
-			});
 	    }
+	});
+	
+	
+	//######################	js-sdk	调试		################################
+	
+	//---------------	分享接口	-----------------------
+	
+	//分享接口：获取“分享到朋友圈”按钮点击状态及自定义分享内容接口
+	wx.onMenuShareTimeline({
+		title: '分享到朋友圈测试', // 分享标题
+		link: 'http://www.lixinsj.com.cn/weixin/page/weixin/open/weixin_js_sdk.jsp', // 分享链接
+		imgUrl: 'http://www.lixinsj.com.cn/weixin/incoming/qrcode.jpg', // 分享图标
+		trigger: function (res) {
+			alert('触发点击分享到朋友圈');
+		},
+		success: function () { 
+			// 用户确认分享后执行的回调函数
+			alert("分享到朋友圈测试成功！");
+		},
+		cancel: function () { 
+			// 用户取消分享后执行的回调函数
+			alert("取消分享到朋友圈测试成功！");
+		}
+	});
+	
+	//分享接口：获取“分享给朋友”按钮点击状态及自定义分享内容接口
+	wx.onMenuShareAppMessage({
+		title: '分享给朋友', // 分享标题
+		desc: '微信公众号开发js-sdk测试——分享给朋友', // 分享描述
+		link: 'http://www.lixinsj.com.cn/weixin/page/weixin/open/weixin_js_sdk.jsp', // 分享链接
+		imgUrl: 'http://www.lixinsj.com.cn/weixin/incoming/qrcode.jpg', // 分享图标
+		success: function () { 
+			// 用户确认分享后执行的回调函数
+			alert("分享给朋友测试成功！");
+		},
+		cancel: function () { 
+			// 用户取消分享后执行的回调函数
+			alert("取消分享给朋友测试成功！");
+		}
+	});
+	
+	//分享接口：获取“分享到QQ”按钮点击状态及自定义分享内容接口
+	wx.onMenuShareQQ({
+		title: '分享到QQ', // 分享标题
+		desc: '微信公众号开发js-sdk测试——分享到QQ', // 分享描述
+		link: 'http://www.lixinsj.com.cn/weixin/page/weixin/open/weixin_js_sdk.jsp', // 分享链接
+		imgUrl: 'http://www.lixinsj.com.cn/weixin/incoming/qrcode.jpg', // 分享图标
+		success: function () { 
+			// 用户确认分享后执行的回调函数
+			alert("分享到QQ测试成功！");
+		},
+		cancel: function () { 
+			// 用户取消分享后执行的回调函数
+			alert("取消分享到QQ测试成功！");
+		}
+	});
+	
+	//分享接口：获取“分享到腾讯微博”按钮点击状态及自定义分享内容接口
+	wx.onMenuShareWeibo({
+		title: '分享到微博', // 分享标题
+		desc: '微信公众号开发js-sdk测试——分享到微博', // 分享描述
+		link: 'http://www.lixinsj.com.cn/weixin/page/weixin/open/weixin_js_sdk.jsp', // 分享链接
+		imgUrl: 'http://www.lixinsj.com.cn/weixin/incoming/qrcode.jpg', // 分享图标
+		success: function () { 
+			// 用户确认分享后执行的回调函数
+			alert("分享到腾讯微博测试成功！");
+		},
+		cancel: function () { 
+			// 用户取消分享后执行的回调函数
+			alert("取消分享到腾讯微博测试成功！");
+		}
+	});
+	
+	//分享接口：获取“分享到QQ空间”按钮点击状态及自定义分享内容接口
+	wx.onMenuShareQZone({
+		title: '分享到QQ空间', // 分享标题
+		desc: '微信公众号开发js-sdk测试——分享到QQ空间', // 分享描述
+		link: 'http://www.lixinsj.com.cn/weixin/page/weixin/open/weixin_js_sdk.jsp', // 分享链接
+		imgUrl: 'http://www.lixinsj.com.cn/weixin/incoming/qrcode.jpg', // 分享图标
+		success: function () {
+			// 用户确认分享后执行的回调函数
+			alert("分享到QQ空间测试成功！");
+		},
+		cancel: function () { 
+			// 用户取消分享后执行的回调函数
+			alert("取消分享到QQ空间测试成功！");
+		}
 	});
 	
 	
@@ -214,7 +214,7 @@ wx.ready(function(){
 	       domainBaseUrl +'/upload/images/meinv.jpg',	
 	       domainBaseUrl +'/upload/images/shuangjiegun.jpg',
 	       domainBaseUrl +'/upload/images/thumb_music.jpg',
-	       domainBaseUrl +'/upload/images/Zhuoku189.jpg']
+	       domainBaseUrl +'/upload/images/Zhuoku189.jpg'];
 		wx.previewImage({
 		    current: imgUrls[1], // 当前显示图片的http链接，显示第二张
 		    urls: imgUrls	// 需要预览的图片http链接列表
@@ -232,7 +232,7 @@ wx.ready(function(){
 	});
 	function syncUpload(localIds) {
 		var localId = localIds.pop();
-		alert("准备上传图片："+localId)
+		alert("准备上传图片："+localId);
 		wx.uploadImage({
 		    localId: localId, // 需要上传的图片的本地ID，由chooseImage接口获得
 		    isShowProgressTips: 1, // 默认为1，显示进度提示
@@ -370,7 +370,7 @@ wx.ready(function(){
 		        serverId = res.serverId; // 返回音频的服务器端ID
 		    }
 		});
-		alert("成功上传刚录制的语音，语音本地ID："+voiceLocalId)
+		alert("成功上传刚录制的语音，语音本地ID："+voiceLocalId);
 	});
 	
 	//下载语音接口

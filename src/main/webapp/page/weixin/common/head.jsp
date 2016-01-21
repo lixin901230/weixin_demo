@@ -9,4 +9,5 @@
 
 <script src="${ctx}/resource/weixin/js/common/CommonUtil.js" type="text/javascript"></script>
 <script src="${ctx}/resource/weixin/js/common/md5.js" type="text/javascript"></script>
+<script src="${ctx}/resource/weixin/js/jweixin-1.0.0.js" type="text/javascript"></script>
 <script src="${ctx}/resource/weixin/js/loginRegister.js" type="text/javascript"></script>

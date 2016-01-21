@@ -103,7 +103,7 @@ public class WeixinJsSdkValidateServlet extends DispatchServletSupport {
 			String jsApiTicket = getJsApiTicket();
 			
 			jsConfigMap = wxJsSdkSignature(appId, jsApiTicket, targetUrl);
-			CacheUtils.put(WX_JS_CONF_CACHE_KEY, jsConfigMap, 5400);
+			//CacheUtils.put(WX_JS_CONF_CACHE_KEY, jsConfigMap, 5400);
 		}
 		
 		JSONObject jsonObject = JsonUtil.objToJson(ResultHandle.getResultDataMap(jsConfigMap));
