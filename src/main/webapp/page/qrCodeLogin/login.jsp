@@ -7,6 +7,8 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<meta name="viewport" content="width=750, target-densitydpi=device-dpi, user-scalable=no">
 	<%@ include file="common/head.jsp"%>
+	<script src="${ctx}/resource/weixin/js/jweixin-1.0.0.js" type="text/javascript"></script>
+	<script src="${ctx}/resource/weixin/js/wx_js_sdk_init_config.js" type="text/javascript"></script>
 	<title>用户登录</title>
 </head>
 <body>
@@ -41,9 +43,76 @@
 	            <div class="float_two tr"><a href="javascript:void(0);" class="link2">忘记密码</a></div>
 	        </div>
 	        <div class="p0_30"><a href="javascript:void(0);" id="login_btn" class="btn1">登录</a></div>
-	        <!-- <div class="login_foot"><span class="f24 gaf">没有帐号？</span><a href="javascript:void(0);" id="btn_register" class="link1">立即注册</a></div> -->
+			<!-- <div class="login_foot"><span class="f24 gaf">没有帐号？</span><a href="javascript:void(0);" id="btn_register" class="link1">立即注册</a></div> -->
+			<br/>
+			<button id="quit_btn" style="display: ;">退出</button>
 	    </div>
 		<!---------- main end ---------->
 	</div>
+	<script type="text/javascript">
+				
+    	$(function() {
+			//手机登录事件绑定
+		    $("#login_btn").on("click", function(){
+		    	qrCodeLogin();
+		    });
+			
+			//退出页面
+			$("#quit_btn").on("click", function(){
+				if(wx) {
+					//微信浏览器关闭（微信jssdk接口关闭当前打开的登录页面）
+			    	WeixinJSBridge.call('closeWindow');
+			    	//wx.closeWindow();
+				} else {
+					window.close();	//其他手机浏览器关闭
+				}
+		    });
+		});
+    	
+		//手机扫码后登录
+		function qrCodeLogin(){
+			var uuid = $('#uuid').val();
+			var userName = $("#userName").val();
+			var password = $("#password").val();
+			if(userName == null || userName == "") {
+				return false;
+			}
+			if(password == null || password == "") {
+				return false;
+			}
+			password = MD5(password.replace(/\%/g, "%25").replace(/\+/g, "%2B").replace(/\&/g, "%26"));
+			$.ajax({
+				url: base +"/PhoneQrCodeLoginServlet?method=phoneLogin",
+				type: 'post',
+				data: {
+					uuid: uuid,
+			        userName: userName,
+			        password: password
+				},
+				dataType: 'json',
+				cache: false,
+				async: false,
+				success: function(data) {
+					
+					if(data && data.success){
+			        	alert("登录成功");
+			        	
+			        	if(wx) {
+				        	//微信浏览器关闭（微信jssdk接口关闭当前打开的登录页面）
+							//WeixinJSBridge.call('closeWindow');
+				        	wx.closeWindow();
+			        	} else {
+			        		//其他手机浏览器须在此依次判断关闭
+			        		window.close();
+			        	}
+			        }else{
+			        	alert("登录失败");
+			        }
+				},
+				error: function(){}
+			});
+		    return loginSuccess;
+		}
+	</script>
 </body>
 </html>
