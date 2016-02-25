@@ -53,6 +53,15 @@
 		<!-- <version>3.2.0</version> -->  
 	</dependency>
 	
+	<!-- 本地jar包依赖引入 -->
+	<dependency>
+	    <groupId>org.jbarcode</groupId>
+	    <artifactId>jbarcode</artifactId>
+	    <version>0.2.8</version>
+	    <scope>system</scope>
+	    <systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/jbarcode-0.2.8.jar</systemPath>
+	</dependency>
+	
 	<!-- xml 依赖 -->
 	<dependency>
 	  	<groupId>dom4j</groupId>
